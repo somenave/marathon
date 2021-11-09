@@ -1,0 +1,1 @@
+the function converts the resulting string to "vertical view" and prints it to the console
