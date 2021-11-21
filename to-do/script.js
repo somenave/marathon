@@ -1,7 +1,7 @@
 const list = [{
         id: 1,
         name: 'create a post',
-        status: 'TODO',
+        status: 'To Do',
         priority: 'low'
     },
     {
@@ -12,7 +12,13 @@ const list = [{
     }
 ];
 
-function addTask(taskName, taskStatus = 'TODO', priority = 'low') {
+const todo = "To Do";
+const doing = "Doing";
+const done = 'Done';
+const low = 'low';
+const high = 'high';
+
+const addTask = (taskName, taskStatus = todo, priority = low) => {
     if (taskName) {
         list.push({
             id: list.length + 1,
@@ -23,9 +29,9 @@ function addTask(taskName, taskStatus = 'TODO', priority = 'low') {
     } else {
         console.log('Type task name');
     }
-}
+};
 
-function changeStatus(taskName, newStatus) {
+const changeStatus =(taskName, newStatus) => {
     if (taskName) {
         for (let i = 0; i < list.length; i++) {
             if (list[i].name == taskName) {
@@ -33,9 +39,9 @@ function changeStatus(taskName, newStatus) {
             }
         }
     }
-}
+};
 
-function deleteTask(taskName) {
+const deleteTask = (taskName) => {
     if (taskName) {
         for (let i = 0; i < list.length; i++) {
             if (list[i].name == taskName) {
@@ -43,52 +49,46 @@ function deleteTask(taskName) {
             }
         }
     }
-}
+};
 
+const getTaskBy = (property, value) => {
+    return list.filter(item => item[property] === value);
+};
+
+const showTask = (item) => {
+    console.log(`id = ${item.id}, name = ${item.name}`);
+};
+
+const showByPriority = (property) => {
+    for (let key of ['low', 'high']) {
+        console.log(key + ':');
+        getTaskBy(property, key).forEach(item => {showTask(item);});
+        console.log('\n');
+    }
+};
+
+const showByStatus = (property) => {
+    for (let key of ['To Do', 'Doing', 'Done']) {
+        console.log(key + ':');
+        getTaskBy(property, key).forEach(item => {showTask(item);});
+        console.log('\n');
+    }
+};
+
+const showListBy = (property) => {
+    if (property == 'priority') {
+        showByPriority(property);
+    } 
+    if (property == 'status') {
+        showByStatus(property);
+    }
+};
+
+
+
+showListBy('priority');
 addTask('newTask');
 
-changeStatus('newTask', 'Doing');
+changeStatus('newTask', doing);
 
 deleteTask('create a post');
-
-
-//НЕ РАБОТАЕТ
-
-// function showBy(param = 'priority') {
-//     let answer = {};
-//     for (let i = 0; i < list.length; i++) {
-//         if (param == 'priority') {
-//             answer = {
-//                 high: '',
-//                 low: ''
-//             };
-            
-//             if (list[i].priority == 'high') {
-//                 answer.high += (list[i].name);
-//             } else if (list[i].priority == 'low') {
-//                 answer.low += (list[i].name);
-//             }
-//         }
-
-//         if (param == 'status') {
-//             answer = {
-//                 todo: [],
-//                 done: [],
-//                 doing: []
-//             };
-//             if (list[i].status == 'TODO') {
-//                 answer.todo.push(list[i].name);
-//                 console.log('todo');
-//             } else if (list[i].status == 'Done') {
-//                 answer.done.push(list[i].name);
-//             } else if (list[i].status == 'Doing') {
-//                 answer.doing.push(list[i].name);
-//             }
-//         }
-//     }
-//     console.log(answer);
-// }
-
-// showBy('priority');
-
-console.log(list);
