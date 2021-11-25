@@ -1,0 +1,160 @@
+.custom-checkbox__field:checked + .custom-checkbox__content::after {
+  opacity: 1;
+}
+
+.custom-checkbox__field:focus + .custom-checkbox__content::before {
+  outline: 2px solid #f00;
+  outline-offset: 2px;
+}
+
+.custom-checkbox__field:disabled + .custom-checkbox__content {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: "Work Sans", "Roboto", sans-serif;
+  font-display: swap;
+  color: #ffffff;
+  background: #17171C;
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+}
+
+a,
+button,
+input,
+textarea {
+  color: inherit;
+  font-family: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  display: block;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 15px;
+  max-width: 1200px;
+}
+
+.site-container {
+  position: relative;
+  overflow-x: hidden;
+}
+
+.btn {
+  padding: 26px;
+  font-weight: normal;
+  font-size: 32px;
+  line-height: 1rem;
+  width: 69px;
+  height: 72px;
+  border-radius: 24px;
+  text-align: center;
+  transition: background 0.3s ease-out;
+  width: 100%;
+}
+.btn:hover {
+  background: #4E505F;
+}
+
+.calc {
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.calc__container {
+  padding: 25px;
+}
+.calc__main {
+  display: grid;
+  grid-template: repeat(2, auto)/repeat(1, auto);
+  gap: 15px;
+}
+
+.calc-reset {
+  grid-column: 1/4;
+  display: grid;
+  grid-template: 1fr/repeat(3, 1fr);
+  gap: 15px;
+}
+.calc-reset__all {
+  background: #2E2F38;
+  grid-column: 1/3;
+  grid-row: 1;
+  width: 100%;
+}
+.calc-reset__some {
+  background: #2E2F38;
+  font-size: 24px;
+  padding: 26px 12px;
+  grid-row: 1;
+  grid-column: 3;
+}
+
+.calc-result {
+  font-weight: 300;
+  font-size: 96px;
+  line-height: 96px;
+  margin-bottom: 16px;
+  text-align: right;
+}
+
+.calc-numbers {
+  grid-column: 1/4;
+  grid-row: 2/auto;
+  display: grid;
+  grid-template: repeat(3, 1fr)/repeat(3, 1fr);
+  gap: 15px;
+}
+.calc-numbers__item {
+  background: #2E2F38;
+}
+.calc-numbers__item_zero {
+  width: 100%;
+  grid-row: auto;
+  grid-column: 1/4;
+}
+
+.calc-actions {
+  display: grid;
+  gap: 15px;
+  grid-column: 4;
+  grid-row: 1/3;
+}
+.calc-actions__item {
+  background: #4B5EFC;
+}
+.calc-actions__item:hover {
+  background: #3343d6;
+}
+/*# sourceMappingURL=main.css.map */
