@@ -81,6 +81,7 @@ h5 {
   text-align: center;
   transition: background 0.3s ease-out;
   width: 100%;
+  cursor: pointer;
 }
 .btn:hover {
   background: #4E505F;
@@ -94,6 +95,8 @@ h5 {
 }
 .calc__container {
   padding: 25px;
+  max-width: 385px;
+  width: 100%;
 }
 .calc__main {
   display: grid;
@@ -127,6 +130,7 @@ h5 {
   line-height: 96px;
   margin-bottom: 16px;
   text-align: right;
+  transition: all 0.4s ease-out;
 }
 
 .calc-numbers {
@@ -157,4 +161,3 @@ h5 {
 .calc-actions__item:hover {
   background: #3343d6;
 }
-/*# sourceMappingURL=main.css.map */
