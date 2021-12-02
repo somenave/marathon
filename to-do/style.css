@@ -1,0 +1,130 @@
+html {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-display: swap;
+    color: #ffffff;
+}
+
+
+img {
+    max-width: 100%;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+    color: inherit;
+}
+
+
+a,
+button,
+input,
+textarea {
+    color: inherit;
+    font-family: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    display: block;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 0 15px;
+    max-width: 1200px;
+}
+
+
+.site-container {
+    position: relative;
+    overflow-x: hidden;
+}
+
+
+.icon {
+    max-width: 15px;
+    max-height: 15px;
+}
+
+button {
+    border: none;
+    background: none;
+}
+
+.todo {
+    max-width: 400px;
+    background: #ffffff;
+}
+
+.todo-add,
+.todo-task {
+    position: relative;
+}
+
+.close-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.todo-add {
+    background: #FFFFFF;
+    border: 1px solid #989898;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 8px;
+}
+
+.todo-add__text {
+    font-size: 18px;
+    line-height: 21px;
+    color: #BBBBBB;
+}
+
+.priority__title {
+    font-size: 18px;
+    line-height: 21px;
+    color: #000000;
+    text-align: center;
+    font-weight: 400;
+    margin: 12px 0;
+}
+
+.todo-task {
+    margin-bottom: 8px;
+}
+
+.todo-task label {
+    display: flex;
+    align-items: center;
+    border: 1px solid #989898;
+    box-sizing: border-box;
+    border-radius: 6px;
+    padding: 12px;
+}
+
+.todo-task__text {
+    margin-left: 12px;
+    font-size: 18px;
+    line-height: 21px;
+    color: #202020;
+}

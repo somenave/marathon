@@ -1,16 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-do</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <h1>Work only with console</h1>
-    <div>addTask("task") - add new task in list</div>
-    <div>changeStatus("task", "status") - change task status</div>
-    <div>deleteTask("task") - delete task from your list</div>
+    <div class="todo container">
+        <div class="todo__priority priority-high">
+            <h3 class="priority__title">HIGH</h3>
+            <ul class="todo-list">
+                <li class="todo-list__add todo-add">
+                    <div class="todo-add__text">Добавить важных дел</div>
+                    <button class="close-icon">
+                        <svg class="icon">
+                            <use xlink:href="#close-icon"></use>
+                          </svg>
+                    </button>
+                </li>
+                <li class="todo-task">
+                    <label>
+                        <input type="radio">
+                        <div class="todo-task__text">Сверстать этот TODO list</div>
+                    </label>
+                    <button class="close-icon">
+                        <svg class="icon">
+                            <use xlink:href="#close-icon"></use>
+                          </svg>
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        
+        <div class="todo__priority priority-low">
+            <h3 class="priority__title">LOW</h3>
+            <ul class="todo-list">
+                <li class="todo-list__add todo-add">
+                    <div class="todo-add__text">Добавить</div>
+                    <button class="close-icon">
+                        <svg class="icon">
+                            <use xlink:href="#close-icon"></use>
+                          </svg>
+                    </button>
+                </li>
+                <li class="todo-task">
+                    <label>
+                        <input type="radio">
+                        <div class="todo-task__text">Посмотреть youtube</div>
+                    </label>
+                    <button class="close-icon">
+                        <svg class="icon">
+                            <use xlink:href="#close-icon"></use>
+                          </svg>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <svg width="20" height="20" class="hidden">
+        <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" id="close-icon">
+          <line y1="-0.5" x2="18.0096" y2="-0.5" transform="matrix(0.999988 -0.00481873 0.0748716 0.997193 1 10)" stroke="#998899"></line>
+          <line y1="-0.5" x2="18.0401" y2="-0.5" transform="matrix(-0.0192905 -0.999814 0.998699 0.0509976 10.5404 18.8444)" stroke="#998899"></line>
+        </symbol>
+      </svg>
+
     <script src="script.js"></script>
 </body>
+
 </html>
