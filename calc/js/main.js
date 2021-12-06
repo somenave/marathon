@@ -1,4 +1,11 @@
-import { resetAllBtn, resetSomeBtn, actions, equalBtn, result, numbers } from './view.js';
+import {
+  resetAllBtn,
+  resetSomeBtn,
+  actions,
+  equalBtn,
+  result,
+  numbers
+} from './view.js';
 let resultValue = result.textContent;
 
 let firstNum;
@@ -84,17 +91,22 @@ function calc(a, b, operator) {
       return a * b;
     case ":":
     case "/":
-      if (b == 0) {
-        return "You cannot divide by zero";
+      try {
+        if (b !== 0) {
+          return a / b;
+        } else {
+          throw new Error("You cannot divide by zero");
+        }
+      } catch (e) {
+        alert(e.message);
       }
-
-      return a / b;
-    case "^":
-      return a ^ b;
-    case "%":
-      return a % b;
-    default:
-      return "unknown operation";
+      break;
+      case "^":
+        return a ^ b;
+      case "%":
+        return a % b;
+      default:
+        alert("unknown operation");
   }
 }
 
