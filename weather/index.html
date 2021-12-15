@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="site-container container">
+        <div class="weather">
+            <div class="weather__search search">
+                <input type="text" class="search__input" placeholder="Aktobe">
+                <button class="search__icon">
+                    <img src="img/search-icon.svg" alt="">
+                </button>
+            </div>
+            <div class="weather__content">
+                <div class="weather__output output">
+                    <div class="output__now now output-item active">
+                        <div class="now__temperature">
+                            <span class="now__temperature-value">14</span>
+                            &deg;
+                        </div>
+                        <div class="now__image">
+                            <img src="img/now-weather/cloud.png" alt="">
+                        </div>
+                        <div class="now__bottom now-bottom">
+                            <div class="now-bottom__location">Aktobe</div>
+                            <button class="now-bottom__like">
+                                <img src="img/like-icon.svg" alt="">
+                            </button>
+                        </div>
+                    </div>
+                    <div class="output__details details output-item">
+                        <div class="details__item details-item">
+                            Temperature:
+                            <span class="details-item__value">14</span>
+                            <div class="deg">&deg;</div>
+                        </div>
+                        <div class="details__item details-item">
+                            Feels like:
+                            <span class="details-item__value">10</span>
+                            <div class="deg">&deg;</div>
+                        </div>
+                        <div class="details__item details-item">
+                            Weather:
+                            <span class="details-item__value">Clouds</span>
+                        </div>
+                        <div class="details__item details-item">
+                            Sunrise:
+                            <span class="details-item__value">03:21</span>
+                        </div>
+                        <div class="details__item details-item">
+                            Sunset:
+                            <span class="details-item__value">18:54</span>
+                        </div>
+                    </div>
+                    <div class="output__forecast forecast output-item"></div>
+                    <div class="output__tabs output-tabs">
+                        <button class="output-tabs__item active">Now</button>
+                        <button class="output-tabs__item">Details</button>
+                        <button class="output-tabs__item">Forecast</button>
+                    </div>
+                </div>
+                <div class="weather__locations locations">
+                    <div class="locations__title">Added Locations:</div>
+                    <ul class="locations__list locations-list">
+                        <li class="locations-list__item">Amur</li>
+                        <li class="locations-list__item">Samara</li>
+                        <li class="locations-list__item">Bali</li>
+                        <li class="locations-list__item">Dane</li>
+                        <li class="locations-list__item">Kilo</li>
+                        <li class="locations-list__item">Nur-Sultan</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
