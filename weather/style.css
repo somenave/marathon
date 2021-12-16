@@ -307,6 +307,20 @@ h5 {
     height: 30px;
 }
 
+.search-icon svg {
+    transition: all 0.2s ease-in;
+    opacity: 0.5;
+}
+
+.search-icon:hover svg {
+    opacity: 0.8;
+}
+
+.location {
+    font-size: 24px;
+    line-height: 28px;
+}
+
 .locations__title {
     padding: 30px 18px 10px;
     font-size: 24px;
@@ -339,18 +353,11 @@ h5 {
     flex-direction: column;
     justify-content: space-between;
 }
-/* 
+
 .output-item {
     transition: all .2s ease-in;
     padding: 20px;
-    visibility: hidden;
-    display: none;
 }
-
-.output-item.active {
-    display: block;
-    visibility: visible;
-} */
 
 .output-tabs {
     display: grid;
@@ -371,6 +378,14 @@ h5 {
 .output-tabs__item.active {
     background-color: #000;
     color: #fff;
+}
+
+.output-tabs__item.active:hover {
+    background-color: #000;
+}
+
+.output-tabs__item:hover {
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 .now {
@@ -408,11 +423,21 @@ h5 {
     width: 22px;
     height: 22px;
     object-fit: cover;
+    transition: all .2s ease-in;
+}
+
+.now-bottom__like:hover svg path {
+    stroke: red;
 }
 
 .details {
+    padding: 30px 20px 20px;
     display: flex;
     flex-direction: column;
+}
+
+.details__location {
+    margin-bottom: 40px;
 }
 
 .details-item {
@@ -429,10 +454,67 @@ h5 {
     margin-left: -5px;
 }
 
+.forecast {
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 0px 20px 20px;
+}
+
+.forecast__location {
+    margin-bottom: 10px;
+}
+
+.forecast__cards {
+    overflow-y: auto;
+    height: 100%;
+    width: 100%;
+    max-height: 280px;
+}
+
+.forecast__card {
+    margin-bottom: 9px;
+    padding: 6px 10px 13px;
+}
+
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid black;
+    font-size: 18px;
+}
+
+.card__top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card__bottom {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card__weather {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.card__img {
+    width: 31px;
+}
+
+.card__temperature {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
 .output-item {
-    transition: all .2s ease-in;
-    padding: 20px;
     visibility: hidden;
     display: none;
 }
