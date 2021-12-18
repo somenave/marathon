@@ -1,8 +1,6 @@
-import {
-    UI
-} from "./view.js";
+import { UI } from "./view.js";
 
- function showTab(tabName) {
+function showTab(tabName) {
     UI.TABS_CONTENT.forEach(tabContent => {
         tabContent.classList.contains(tabName) ? tabContent.classList.add('active') : tabContent.classList.remove('active');
     });
