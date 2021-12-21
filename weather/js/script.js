@@ -6,21 +6,34 @@ UI.TABS.forEach(tab => {
 });
 
 const serverUrl = 'http://api.openweathermap.org/data/2.5/weather';
-let cityName = '';
 const apiKey = 'f660a2fb1e4bad108d6160b7f58c555f';
-let url = `${serverUrl}?q=${cityName}&appid=${apiKey}&units=metric`;
+let cityName = 'Aktobe';
 
-let nowTemperature;
-let nowTemperatureFeels;
-let weatherDescr;
-let iconId;
+let nowTemperature, nowTemperatureFeels, weatherDescr, iconId, sunrise, sunset;
+
+const favoriteCities = JSON.parse(localStorage.getItem('favoriteCities')) || [];
+const currentCity = localStorage.getItem('currentCity') || cityName;
+
+window.addEventListener('DOMContentLoaded', () => {
+    cityName = currentCity;
+    getWeather();
+    renderFavourites();
+    isFavourite();
+});
 
 UI.WEATHER_INNER.addEventListener('submit', (e) => {
     e.preventDefault();
     cityName = UI.SEARCH_INPUT.value;
     getWeather();
-    isFavourite(false);
+    isFavourite();
 });
+
+function convertTime(unixTime) {
+    let date = new Date(unixTime * 1000);
+    let hours = date.getHours();
+    let minutes = "0" + date.getMinutes();
+    return hours + ':' + minutes.slice(-2);
+}
 
 function getIcon(id) {
     let iconUrl = `https://openweathermap.org/img/wn/${id}@4x.png`;
@@ -28,17 +41,20 @@ function getIcon(id) {
 }
 
 function setValues() {
-    UI.NOW_TEMPERATURE.textContent = nowTemperature;
+    UI.NOW_TEMPERATURE.textContent = Math.round(nowTemperature);
     UI.LOCATION.forEach(location => {
         location.textContent = cityName;
     });
-    UI.DETAILS_TEMPERATURE.textContent = nowTemperature;
-    UI.DETAILS_TEMPERATURE_FEELS.textContent = nowTemperatureFeels;
+    UI.DETAILS_TEMPERATURE.textContent = Math.round(nowTemperature);
+    UI.DETAILS_TEMPERATURE_FEELS.textContent = Math.round(nowTemperatureFeels);
     UI.DETAILS_TEMPERATURE_DESCR.textContent = weatherDescr;
+    UI.DETAILS_TEMPERATURE_SUNRISE.textContent = sunrise;
+    UI.DETAILS_TEMPERATURE_SUNSET.textContent = sunset;
 }
 
 function getWeather() {
-    url = `${serverUrl}?q=${cityName}&appid=${apiKey}&units=metric`;
+    const url = `${serverUrl}?q=${cityName}&appid=${apiKey}&units=metric`;
+    localStorage.setItem('currentCity', cityName);
     fetch(url)
         .then(json => json.json())
         .then(response => {
@@ -49,68 +65,79 @@ function getWeather() {
             nowTemperatureFeels = `${response.main.feels_like}`;
             weatherDescr = `${response.weather[0].main}`;
             iconId = `${response.weather[0].icon}`;
+            sunrise = convertTime(response.sys.sunrise);
+            sunset = convertTime(response.sys.sunset);
             setValues();
             getIcon(iconId);
         })
-        .catch(e => alert(e));
+        .catch(alert);
 }
 
-function favouriteHandler() {
-    let favouriteArray = UI.FAVOURITE_LOCATIONS.children;
-    let isNotAdded = true;
-    for (let li of favouriteArray) {
-        if (li.getAttribute('data-liked') == cityName) {
-            isNotAdded = false;
-            isFavourite(false);
-            li.remove();
-        }
-    }
-    if (isNotAdded && cityName !== '') {
-        isFavourite(true);
-        addToFavourites();
-    }
-}
-
-function addToFavourites() {
-    let location = document.createElement('li');
-    location.classList.add('locations-list__item');
-    location.setAttribute('data-liked', cityName);
-    location.textContent = cityName;
-    UI.FAVOURITE_LOCATIONS.append(location);
-}
-
-function isFavourite(operator) {
-    if (operator) {
+function isFavourite() {
+    if (favoriteCities.includes(cityName)) {
         UI.LIKE_BUTTON.classList.add('active');
     } else {
         UI.LIKE_BUTTON.classList.remove('active');
     }
 }
 
-
-UI.LIKE_BUTTON.addEventListener('click', () => {
-    favouriteHandler();
-});
-
-
-UI.FAVOURITE_LOCATIONS.addEventListener('click', (e) => {
-    if (e.target.classList.contains('locations-list__item')) {
-        UI.WEATHER_INNER.reset();
-        cityName = e.target.textContent;
-        getWeather();
-        isFavourite(true);
+function favouriteHandler() {
+    if (!favoriteCities.includes(cityName)) {
+        addToFavorites(cityName);
+        renderFavourites();
+        isFavourite();
     }
-});
+}
 
-// async function getWeather(url) {
-//     let response = await fetch(url);
-//     if (response.ok) {
-//         let json = await response.json();
-//         nowTemperature = `${json.main.temp}`;
-//         nowTemperatureFeels = `${json.main.feels_like}`;
-//         weatherDescr = `${json.weather[0].main}`;
-//         setValues();
-//     } else {
-//         alert("Ошибка HTTP: " + response.status);
-//     }
-// }
+UI.LIKE_BUTTON.addEventListener('click', favouriteHandler);
+
+function renderFavourites() {
+    UI.FAVOURITE_LOCATIONS.innerHTML = '';
+    favoriteCities.forEach(city => {
+        let location = document.createElement('li');
+        location.innerHTML = `
+        <span class="location-item__name">${city}</span> 
+        <button class="location-item__delete" type="button"><img src="./img/delete-icon.svg" alt="Delete icon"></button>
+        `;
+        location.classList.add('locations-list__item', 'location-item', 'favourite');
+        location.setAttribute('data-liked', city);
+        UI.FAVOURITE_LOCATIONS.append(location);
+    });
+}
+
+function locationsClickHandler(e) {
+    const target = e.target;
+    if (target.classList.contains('location-item__name')) {
+        UI.WEATHER_INNER.reset();
+        cityName = target.parentElement.getAttribute('data-liked');
+        getWeather();
+    }
+    if (target.classList.contains('location-item__delete')) {
+        target.parentElement.remove();
+        deleteFromStorage(target.parentElement.getAttribute('data-liked'));
+    }
+    isFavourite();
+}
+
+UI.FAVOURITE_LOCATIONS.addEventListener('click', locationsClickHandler);
+
+function addToFavorites(item) {
+    favoriteCities.push(item);
+    saveFavoriteCities(favoriteCities);
+}
+
+function deleteFromStorage(city) {
+    favoriteCities.forEach((item, i) => {
+        if (item == city) {
+            favoriteCities.splice(i, 1);
+        }
+        saveFavoriteCities(favoriteCities);
+    });
+}
+
+function saveFavoriteCities(favoriteCities) {
+    localStorage.setItem('favoriteCities', JSON.stringify(favoriteCities));
+}
+
+
+

@@ -343,6 +343,10 @@ h5 {
     font-size: 24px;
     line-height: 28px;
     cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 .locations-list__item:not(:last-child) {
