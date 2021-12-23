@@ -14,5 +14,6 @@ export const UI = {
     DETAILS_TEMPERATURE_SUNRISE: document.querySelector('.details-item__sunrise'),
     DETAILS_TEMPERATURE_SUNSET: document.querySelector('.details-item__sunset'),
     DELETE_BUTTONS: document.querySelectorAll('.location-item__delete'),
-    NOW_WEATHER_IMG: document.querySelector('.now-weather-img')
+    NOW_WEATHER_IMG: document.querySelector('.now-weather-img'),
+    FORECAST_CONTAINER: document.querySelector('.forecast__cards')
 };
