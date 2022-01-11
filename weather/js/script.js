@@ -121,7 +121,7 @@ function setValues() {
 }
 
 function toggleFavouriteButton() {
-    if (favoriteCities.includes(currentCity)) {
+    if (favoriteCities.has(currentCity)) {
         UI.LIKE_BUTTON.classList.add('active');
     } else {
         UI.LIKE_BUTTON.classList.remove('active');
@@ -129,7 +129,7 @@ function toggleFavouriteButton() {
 }
 
 function favouriteHandler() {
-    if (!favoriteCities.includes(currentCity)) {
+    if (!favoriteCities.has(currentCity)) {
         addToFavorites(currentCity);
         renderFavourites();
         toggleFavouriteButton();
