@@ -15,7 +15,7 @@ let forecastUrl = '';
 const DEFAULT_CITY_NAME = 'Aktobe';
 let currentCity = localStorage.getItem('currentCity') || DEFAULT_CITY_NAME;
 
-const CURRENT_PARAMS = {
+let CURRENT_PARAMS = {
     temperature: '',
     temperatureFeels: '',
     iconId: '',
@@ -44,7 +44,7 @@ async function getWeather() {
         const answer = await fetch(url);
         if (answer.ok) {
             const response = await answer.json();
-            getParams(response);
+            CURRENT_PARAMS = new ParamsValues(response);
             setValues();
             getIcon(CURRENT_PARAMS.iconId);
             cityId = `${response.id}`;
@@ -58,7 +58,7 @@ async function getWeather() {
             UI.FORECAST_CONTAINER.innerHTML = '';
             const response = await forecast.json();
             response.list.forEach((li) => {
-                getParams(li);
+                CURRENT_PARAMS = new ParamsValues(li);
                 const date = new Date(li.dt_txt);
                 const card = document.createElement('div');
                 card.innerHTML = `
@@ -98,13 +98,15 @@ function getIcon(id) {
     return `https://openweathermap.org/img/wn/${id}@4x.png`;
 }
 
-function getParams(response) {
-    CURRENT_PARAMS.temperature = `${Math.round(response.main.temp)}`;
-    CURRENT_PARAMS.temperatureFeels = `${Math.round(response.main.feels_like)}`;
-    CURRENT_PARAMS.weatherDescr = `${response.weather[0].main}`;
-    CURRENT_PARAMS.iconId = `${response.weather[0].icon}`;
-    CURRENT_PARAMS.sunrise = convertTime(response.sys.sunrise);
-    CURRENT_PARAMS.sunset = convertTime(response.sys.sunset);
+// CONSTRUCTOR
+
+function ParamsValues(response) {
+    this.temperature = `${Math.round(response.main.temp)}`;
+    this.temperatureFeels = `${Math.round(response.main.feels_like)}`;
+    this.weatherDescr = `${response.weather[0].main}`;
+    this.iconId = `${response.weather[0].icon}`;
+    this.sunrise = convertTime(response.sys.sunrise);
+    this.sunset = convertTime(response.sys.sunset);
 }
 
 function setValues() {
@@ -112,8 +114,8 @@ function setValues() {
     UI.LOCATION.forEach(location => {
         location.textContent = currentCity;
     });
-    UI.DETAILS_TEMPERATURE.textContent = Math.round(CURRENT_PARAMS.temperature);
-    UI.DETAILS_TEMPERATURE_FEELS.textContent = Math.round(CURRENT_PARAMS.temperatureFeels);
+    UI.DETAILS_TEMPERATURE.textContent = CURRENT_PARAMS.temperature;
+    UI.DETAILS_TEMPERATURE_FEELS.textContent = CURRENT_PARAMS.temperatureFeels;
     UI.DETAILS_TEMPERATURE_DESCR.textContent = CURRENT_PARAMS.weatherDescr;
     UI.DETAILS_TEMPERATURE_SUNRISE.textContent = CURRENT_PARAMS.sunrise;
     UI.DETAILS_TEMPERATURE_SUNSET.textContent = CURRENT_PARAMS.sunset;

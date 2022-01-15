@@ -1,3 +1,5 @@
+// SET
+
 const favoriteCities = new Set(JSON.parse(localStorage.getItem('favoriteCities'))) || new Set();
 
 function addToFavorites(item) {
