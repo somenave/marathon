@@ -4,3 +4,7 @@
 /calc/node_modules
 node_modules
 /to-do/node_modules
+.parcel-cache
+.idea
+package-lock.json
+dist
