@@ -1,7 +1,8 @@
-import { UI_ELEMENTS } from "./view.js";
+// import format from '../node_modules/date-fns/format';
+import { format } from 'date-fns';
+import { UI_ELEMENTS } from './view.js';
 
-
-const TO_DO = "To Do";
+const TO_DO = 'To Do';
 const DONE = 'Done';
 
 let list = [];
@@ -13,7 +14,7 @@ UI_ELEMENTS.todoForms.forEach(form => {
     });
 });
 
-let taskContent = `
+const taskContent = `
     <label>
         <input type="checkbox" class="done-input">
         <div class="todo-task__text"></div>
@@ -26,7 +27,7 @@ let taskContent = `
 `;
 
 function createTaskLi(priorityContainer) {
-    let currentTaskContent = document.createElement('li');
+    const currentTaskContent = document.createElement('li');
     currentTaskContent.setAttribute('data-id', list.length);
     currentTaskContent.classList.add('todo-task');
     currentTaskContent.innerHTML = taskContent;
@@ -34,11 +35,12 @@ function createTaskLi(priorityContainer) {
     UI_ELEMENTS.currentTaskText = currentTaskContent.querySelector('.todo-task__text');
     let taskName;
     list.forEach(task => {
-        if (task.id == currentTaskContent.getAttribute('data-id')) {
+        if (task.id === currentTaskContent.getAttribute('data-id')) {
             taskName = task.name;
         }
     });
     UI_ELEMENTS.currentTaskText.textContent = taskName;
+    console.log(format(new Date(), 'PP'));
 }
 
 function addTask(priorityContainer) {
@@ -50,12 +52,11 @@ function addTask(priorityContainer) {
                     id: list.length + 1,
                     name: UI_ELEMENTS.addTaskInput.value,
                     status: TO_DO,
-                    priority: priorityContainer.getAttribute('data-priority'),
+                    priority: priorityContainer.getAttribute('data-priority')
                 });
-    
                 createTaskLi(priorityContainer);
             } else {
-                throw new Error("You cannot add an empty task");
+                throw new Error('You cannot add an empty task');
             }
         } catch (e) {
             alert(e.message);
@@ -74,10 +75,10 @@ function isDone() {
         item.addEventListener('change', () => {
             let status = TO_DO;
             list.forEach(task => {
-                if (task.id == item.parentElement.parentElement.getAttribute('data-id')) {
+                if (task.id === item.parentElement.parentElement.getAttribute('data-id')) {
                     task.status = status;
                 }
-            }); 
+            });
             if (item.checked) {
                 status = DONE;
                 item.closest('.todo-task').classList.add('done');
@@ -91,15 +92,15 @@ isDone();
 
 function removeTask() {
     document.querySelectorAll('.close').forEach(item => {
-        let removedTask = item.closest('.todo-task');
+        const removedTask = item.closest('.todo-task');
         item.addEventListener('click', () => {
             if (list.length >= 1) {
                 list.forEach(task => {
-                    if (task.id == removedTask.getAttribute('data-id')) {
+                    if (task.id === removedTask.getAttribute('data-id')) {
                         list.splice(task.id - 1, 1);
                     }
                 });
-    
+
                 removedTask.remove();
             } else {
                 list = [];

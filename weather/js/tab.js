@@ -1,4 +1,4 @@
-import { UI } from "./view.js";
+import { UI } from './view.js';
 
 function showTab(tabName) {
     UI.TABS_CONTENT.forEach(tabContent => {

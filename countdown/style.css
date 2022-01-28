@@ -1,0 +1,34 @@
+
+.container {
+    max-width: 350px;
+    margin: 0 auto;
+    padding: 20vh 20vw;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+}
+
+.countdown {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.countdown__input, .countdown__button {
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #2E2F38;
+}
+
+.countdown__input {
+    width: 100%;
+    max-width: 200px;
+    padding: 0 10px;
+}
+
+.countdown__button {
+    width: 100%;
+    max-width: 120px;
+    font-size: 18px;
+    background: #BBBBBB;
+}

@@ -1,7 +1,7 @@
-import { UI } from "./view.js";
-import { tabsHandler } from "./tab.js";
+import { UI } from './view.js';
+import { tabsHandler } from './tab.js';
 
-import { addToFavorites, deleteFromStorage, saveFavoriteCities, favoriteCities } from "./storage.js";
+import { setCookie, addToFavorites, deleteFromStorage, favoriteCities } from './storage.js';
 
 UI.TABS.forEach(tab => {
     tab.addEventListener('click', tabsHandler);
@@ -40,6 +40,7 @@ async function getWeather() {
     try {
         const url = `${serverUrl}?q=${currentCity}&appid=${apiKey}&units=metric`;
         localStorage.setItem('currentCity', currentCity);
+        setCookie('currentCity', currentCity, { secure: true, 'max-age': 3600 });
 
         const answer = await fetch(url);
         if (answer.ok) {
@@ -65,7 +66,7 @@ async function getWeather() {
             <div class="forecast__card card">
                 <div class="card__top">
                     <div class="card__date">${date.getDate()} ${date.toLocaleString('en-US', { month: 'short' })}</div>
-                    <div class="card__time">${date.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'})}</div>
+                    <div class="card__time">${date.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' })}</div>
                 </div>
                 <div class="card__bottom">
                     <div class="card__temperature">
@@ -90,7 +91,7 @@ async function getWeather() {
 function convertTime(unixTime) {
     const date = new Date(unixTime * 1000);
     const hours = date.getHours();
-    const minutes = "0" + date.getMinutes();
+    const minutes = '0' + date.getMinutes();
     return hours + ':' + minutes.slice(-2);
 }
 
@@ -145,7 +146,7 @@ function renderFavourites() {
     favoriteCities.forEach(city => {
         const location = document.createElement('li');
         location.innerHTML = `
-        <span class="location-item__name">${city}</span> 
+        <span class="location-item__name">${city}</span>
         <button class="location-item__delete" type="button"><img src="./img/delete-icon.svg" alt="Delete icon"></button>
         `;
         location.classList.add('locations-list__item', 'location-item', 'favourite');

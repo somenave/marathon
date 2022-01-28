@@ -2,3 +2,5 @@
 /library
 /calc/src
 /calc/node_modules
+node_modules
+/to-do/node_modules

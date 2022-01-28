@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do</title>
+    <link rel="stylesheet" href="/index.3a01df49.css">
+</head>
+
+<body>
+    <div class="todo container">
+        <div class="todo__priority priority-high">
+            <h3 class="priority__title">HIGH</h3>
+            <ul class="todo-list high-list" data-priority="high">
+                <li class="todo-list__add todo-add">
+                    <form class="todo-form">
+                        <input type="text" class="todo-add__text add-task-input" placeholder="Добавить важных дел">
+                        <button class="action-icon add-task-icon">
+                            <svg class="icon">
+                                <use xlink:href="#action-icon"></use>
+                            </svg>
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="todo__priority priority-low">
+            <h3 class="priority__title">LOW</h3>
+            <ul class="todo-list low-list" data-priority="low">
+                <li class="todo-list__add todo-add">
+                    <form class="todo-form">
+                        <input type="text" class="todo-add__text add-task-input" placeholder="Добавить">
+                        <button class="action-icon add-task-icon">
+                            <svg class="icon">
+                                <use xlink:href="#action-icon"></use>
+                            </svg>
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <svg width="20" height="20" class="hidden">
+        <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" id="action-icon">
+            <line y1="-0.5" x2="18.0096" y2="-0.5" transform="matrix(0.999988 -0.00481873 0.0748716 0.997193 1 10)" stroke="#998899"></line>
+            <line y1="-0.5" x2="18.0401" y2="-0.5" transform="matrix(-0.0192905 -0.999814 0.998699 0.0509976 10.5404 18.8444)" stroke="#998899"></line>
+        </symbol>
+    </svg>
+
+    <script src="/index.4de9b498.js" defer=""></script>
+    <script src="js/view.js" defer=""></script>
+</body>
+
+</html>
