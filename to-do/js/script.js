@@ -22,7 +22,7 @@ const taskContent = `
     <button class="action-icon close">
         <svg class="icon">
             <use xlink:href="#action-icon"></use>
-          </svg>
+        </svg>
     </button>
 `;
 

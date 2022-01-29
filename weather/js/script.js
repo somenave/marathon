@@ -13,7 +13,7 @@ const DEFAULT_CITY_ID = 524901;
 let cityId = DEFAULT_CITY_ID;
 let forecastUrl = '';
 const DEFAULT_CITY_NAME = 'Aktobe';
-let currentCity = localStorage.getItem('currentCity') || DEFAULT_CITY_NAME;
+let currentCity = localStorage.getItem('currentCity') ?? DEFAULT_CITY_NAME;
 
 let CURRENT_PARAMS = {
     temperature: '',
@@ -98,8 +98,6 @@ function convertTime(unixTime) {
 function getIcon(id) {
     return `https://openweathermap.org/img/wn/${id}@4x.png`;
 }
-
-// CONSTRUCTOR
 
 function ParamsValues(response) {
     this.temperature = `${Math.round(response.main.temp)}`;

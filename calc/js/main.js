@@ -1,11 +1,4 @@
-import {
-  resetAllBtn,
-  resetSomeBtn,
-  actions,
-  equalBtn,
-  result,
-  numbers
-} from './view.js';
+import { resetAllBtn, resetSomeBtn, actions, equalBtn, result, numbers } from './view.js';
 let resultValue = result.textContent;
 
 let firstNum;
@@ -32,7 +25,7 @@ const showResult = () => {
 numbers.forEach(item => {
   item.addEventListener('click', () => {
     let number = item.getAttribute('data-value');
-    if (result.textContent[0] == 0) {
+    if (+result.textContent[0] === 0) {
       resultValue = result.textContent.slice(1, result.textContent.length);
     }
     resultValue += number;
@@ -44,7 +37,7 @@ numbers.forEach(item => {
 
 resetAllBtn.addEventListener('click', () => {
   resultValue = 0;
-  result.textContent = 0;
+  result.textContent = '0';
 });
 
 
@@ -58,8 +51,8 @@ actions.addEventListener('click', (e) => {
   firstNum = +resultValue;
   secondNum = 0;
   let action = e.target.getAttribute('id');
-  if (action == 'divider' || action == 'minus' || action == 'plus' || action == 'times') {
-    result.textContent = 0;
+  if (action === 'divider' || action === 'minus' || action === 'plus' || action === 'times') {
+    result.textContent = '0';
   }
   switch (action) {
     case 'divider':

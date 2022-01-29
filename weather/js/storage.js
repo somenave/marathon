@@ -13,7 +13,7 @@ export function setCookie(name, value, options = {}) {
     document.cookie = updatedCookie;
 }
 
-const favoriteCities = new Set(JSON.parse(localStorage.getItem('favoriteCities'))) || new Set();
+const favoriteCities = new Set(JSON.parse(localStorage.getItem('favoriteCities'))) ?? new Set();
 
 function addToFavorites(item) {
     favoriteCities.add(item);
