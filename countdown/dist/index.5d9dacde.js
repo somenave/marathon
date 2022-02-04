@@ -522,10 +522,15 @@ function hmrAcceptRun(bundle, id) {
 var _dateFns = require("date-fns");
 var _view = require("./view");
 _view.UI.form.addEventListener('submit', ()=>{
-    const inputValue = _view.UI.input.value;
-    _view.UI.result.textContent = `${_dateFns.formatDistanceToNowStrict(new Date(inputValue), {
-        addSuffix: true
-    })}`;
+    const startTime = _view.UI.input.value;
+    const endTime = _dateFns.format(new Date(), `yyyy-MM-dd'T'HH:mm`);
+    const { years , months , days , hours  } = _dateFns.intervalToDuration({
+        start: _dateFns.parseISO(startTime),
+        end: _dateFns.parseISO(endTime)
+    });
+    // UI.result.textContent = `${formatDistanceToNowStrict(new Date(startTime), { addSuffix: true })}`;
+    if (_dateFns.isValid(startTime)) return;
+    _view.UI.result.textContent = `Years: ${years}, months: ${months}, days: ${days}, hours: ${hours}`;
 });
 
 },{"date-fns":"9yHCA","./view":"2GA9o"}],"9yHCA":[function(require,module,exports) {
@@ -1479,7 +1484,7 @@ var _indexJsDefault235 = parcelHelpers.interopDefault(_indexJs235);
 var _indexJs236 = require("./constants/index.js");
 parcelHelpers.exportAll(_indexJs236, exports);
 
-},{"./add/index.js":false,"./addBusinessDays/index.js":false,"./addDays/index.js":false,"./addHours/index.js":false,"./addISOWeekYears/index.js":false,"./addMilliseconds/index.js":"7Tp9s","./addMinutes/index.js":false,"./addMonths/index.js":false,"./addQuarters/index.js":false,"./addSeconds/index.js":false,"./addWeeks/index.js":false,"./addYears/index.js":false,"./areIntervalsOverlapping/index.js":false,"./clamp/index.js":false,"./closestIndexTo/index.js":false,"./closestTo/index.js":false,"./compareAsc/index.js":"h01l4","./compareDesc/index.js":false,"./daysToWeeks/index.js":false,"./differenceInBusinessDays/index.js":false,"./differenceInCalendarDays/index.js":false,"./differenceInCalendarISOWeekYears/index.js":false,"./differenceInCalendarISOWeeks/index.js":false,"./differenceInCalendarMonths/index.js":"8oypH","./differenceInCalendarQuarters/index.js":false,"./differenceInCalendarWeeks/index.js":false,"./differenceInCalendarYears/index.js":false,"./differenceInDays/index.js":false,"./differenceInHours/index.js":false,"./differenceInISOWeekYears/index.js":false,"./differenceInMilliseconds/index.js":"Eb6qZ","./differenceInMinutes/index.js":false,"./differenceInMonths/index.js":"8lj6Z","./differenceInQuarters/index.js":false,"./differenceInSeconds/index.js":"5uZgU","./differenceInWeeks/index.js":false,"./differenceInYears/index.js":false,"./eachDayOfInterval/index.js":false,"./eachHourOfInterval/index.js":false,"./eachMinuteOfInterval/index.js":false,"./eachMonthOfInterval/index.js":false,"./eachQuarterOfInterval/index.js":false,"./eachWeekOfInterval/index.js":false,"./eachWeekendOfInterval/index.js":false,"./eachWeekendOfMonth/index.js":false,"./eachWeekendOfYear/index.js":false,"./eachYearOfInterval/index.js":false,"./endOfDay/index.js":"kLkh7","./endOfDecade/index.js":false,"./endOfHour/index.js":false,"./endOfISOWeek/index.js":false,"./endOfISOWeekYear/index.js":false,"./endOfMinute/index.js":false,"./endOfMonth/index.js":"4tHlS","./endOfQuarter/index.js":false,"./endOfSecond/index.js":false,"./endOfToday/index.js":false,"./endOfTomorrow/index.js":false,"./endOfWeek/index.js":false,"./endOfYear/index.js":false,"./endOfYesterday/index.js":false,"./format/index.js":"lnm6V","./formatDistance/index.js":"lPnhm","./formatDistanceStrict/index.js":"gN5ZD","./formatDistanceToNow/index.js":"kV5oc","./formatDistanceToNowStrict/index.js":"9FmDM","./formatDuration/index.js":false,"./formatISO/index.js":false,"./formatISO9075/index.js":false,"./formatISODuration/index.js":false,"./formatRFC3339/index.js":false,"./formatRFC7231/index.js":false,"./formatRelative/index.js":false,"./fromUnixTime/index.js":false,"./getDate/index.js":false,"./getDay/index.js":false,"./getDayOfYear/index.js":false,"./getDaysInMonth/index.js":false,"./getDaysInYear/index.js":false,"./getDecade/index.js":false,"./getHours/index.js":false,"./getISODay/index.js":false,"./getISOWeek/index.js":false,"./getISOWeekYear/index.js":false,"./getISOWeeksInYear/index.js":false,"./getMilliseconds/index.js":false,"./getMinutes/index.js":false,"./getMonth/index.js":false,"./getOverlappingDaysInIntervals/index.js":false,"./getQuarter/index.js":false,"./getSeconds/index.js":false,"./getTime/index.js":false,"./getUnixTime/index.js":false,"./getWeek/index.js":false,"./getWeekOfMonth/index.js":false,"./getWeekYear/index.js":false,"./getWeeksInMonth/index.js":false,"./getYear/index.js":false,"./hoursToMilliseconds/index.js":false,"./hoursToMinutes/index.js":false,"./hoursToSeconds/index.js":false,"./intervalToDuration/index.js":false,"./intlFormat/index.js":false,"./isAfter/index.js":false,"./isBefore/index.js":false,"./isDate/index.js":"kqNhT","./isEqual/index.js":false,"./isExists/index.js":false,"./isFirstDayOfMonth/index.js":false,"./isFriday/index.js":false,"./isFuture/index.js":false,"./isLastDayOfMonth/index.js":"1as6x","./isLeapYear/index.js":false,"./isMatch/index.js":false,"./isMonday/index.js":false,"./isPast/index.js":false,"./isSameDay/index.js":false,"./isSameHour/index.js":false,"./isSameISOWeek/index.js":false,"./isSameISOWeekYear/index.js":false,"./isSameMinute/index.js":false,"./isSameMonth/index.js":false,"./isSameQuarter/index.js":false,"./isSameSecond/index.js":false,"./isSameWeek/index.js":false,"./isSameYear/index.js":false,"./isSaturday/index.js":false,"./isSunday/index.js":false,"./isThisHour/index.js":false,"./isThisISOWeek/index.js":false,"./isThisMinute/index.js":false,"./isThisMonth/index.js":false,"./isThisQuarter/index.js":false,"./isThisSecond/index.js":false,"./isThisWeek/index.js":false,"./isThisYear/index.js":false,"./isThursday/index.js":false,"./isToday/index.js":false,"./isTomorrow/index.js":false,"./isTuesday/index.js":false,"./isValid/index.js":"eXoMl","./isWednesday/index.js":false,"./isWeekend/index.js":false,"./isWithinInterval/index.js":false,"./isYesterday/index.js":false,"./lastDayOfDecade/index.js":false,"./lastDayOfISOWeek/index.js":false,"./lastDayOfISOWeekYear/index.js":false,"./lastDayOfMonth/index.js":false,"./lastDayOfQuarter/index.js":false,"./lastDayOfWeek/index.js":false,"./lastDayOfYear/index.js":false,"./lightFormat/index.js":false,"./max/index.js":false,"./milliseconds/index.js":false,"./millisecondsToHours/index.js":false,"./millisecondsToMinutes/index.js":false,"./millisecondsToSeconds/index.js":false,"./min/index.js":false,"./minutesToHours/index.js":false,"./minutesToMilliseconds/index.js":false,"./minutesToSeconds/index.js":false,"./monthsToQuarters/index.js":false,"./monthsToYears/index.js":false,"./nextDay/index.js":false,"./nextFriday/index.js":false,"./nextMonday/index.js":false,"./nextSaturday/index.js":false,"./nextSunday/index.js":false,"./nextThursday/index.js":false,"./nextTuesday/index.js":false,"./nextWednesday/index.js":false,"./parse/index.js":false,"./parseISO/index.js":false,"./parseJSON/index.js":false,"./previousDay/index.js":false,"./previousFriday/index.js":false,"./previousMonday/index.js":false,"./previousSaturday/index.js":false,"./previousSunday/index.js":false,"./previousThursday/index.js":false,"./previousTuesday/index.js":false,"./previousWednesday/index.js":false,"./quartersToMonths/index.js":false,"./quartersToYears/index.js":false,"./roundToNearestMinutes/index.js":false,"./secondsToHours/index.js":false,"./secondsToMilliseconds/index.js":false,"./secondsToMinutes/index.js":false,"./set/index.js":false,"./setDate/index.js":false,"./setDay/index.js":false,"./setDayOfYear/index.js":false,"./setHours/index.js":false,"./setISODay/index.js":false,"./setISOWeek/index.js":false,"./setISOWeekYear/index.js":false,"./setMilliseconds/index.js":false,"./setMinutes/index.js":false,"./setMonth/index.js":false,"./setQuarter/index.js":false,"./setSeconds/index.js":false,"./setWeek/index.js":false,"./setWeekYear/index.js":false,"./setYear/index.js":false,"./startOfDay/index.js":false,"./startOfDecade/index.js":false,"./startOfHour/index.js":false,"./startOfISOWeek/index.js":false,"./startOfISOWeekYear/index.js":false,"./startOfMinute/index.js":false,"./startOfMonth/index.js":false,"./startOfQuarter/index.js":false,"./startOfSecond/index.js":false,"./startOfToday/index.js":false,"./startOfTomorrow/index.js":false,"./startOfWeek/index.js":false,"./startOfWeekYear/index.js":false,"./startOfYear/index.js":false,"./startOfYesterday/index.js":false,"./sub/index.js":false,"./subBusinessDays/index.js":false,"./subDays/index.js":false,"./subHours/index.js":false,"./subISOWeekYears/index.js":false,"./subMilliseconds/index.js":"lL2M9","./subMinutes/index.js":false,"./subMonths/index.js":false,"./subQuarters/index.js":false,"./subSeconds/index.js":false,"./subWeeks/index.js":false,"./subYears/index.js":false,"./toDate/index.js":"fsust","./weeksToDays/index.js":false,"./yearsToMonths/index.js":false,"./yearsToQuarters/index.js":false,"./constants/index.js":"iOhcx","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7Tp9s":[function(require,module,exports) {
+},{"./add/index.js":false,"./addBusinessDays/index.js":false,"./addDays/index.js":"g6fAH","./addHours/index.js":false,"./addISOWeekYears/index.js":false,"./addMilliseconds/index.js":"7Tp9s","./addMinutes/index.js":false,"./addMonths/index.js":"hES3W","./addQuarters/index.js":false,"./addSeconds/index.js":false,"./addWeeks/index.js":false,"./addYears/index.js":false,"./areIntervalsOverlapping/index.js":false,"./clamp/index.js":false,"./closestIndexTo/index.js":false,"./closestTo/index.js":false,"./compareAsc/index.js":"h01l4","./compareDesc/index.js":false,"./daysToWeeks/index.js":false,"./differenceInBusinessDays/index.js":false,"./differenceInCalendarDays/index.js":"adZXy","./differenceInCalendarISOWeekYears/index.js":false,"./differenceInCalendarISOWeeks/index.js":false,"./differenceInCalendarMonths/index.js":"8oypH","./differenceInCalendarQuarters/index.js":false,"./differenceInCalendarWeeks/index.js":false,"./differenceInCalendarYears/index.js":"f4WIY","./differenceInDays/index.js":"1mpAo","./differenceInHours/index.js":"9Vac7","./differenceInISOWeekYears/index.js":false,"./differenceInMilliseconds/index.js":"Eb6qZ","./differenceInMinutes/index.js":"4Qv17","./differenceInMonths/index.js":"8lj6Z","./differenceInQuarters/index.js":false,"./differenceInSeconds/index.js":"5uZgU","./differenceInWeeks/index.js":false,"./differenceInYears/index.js":"2tncr","./eachDayOfInterval/index.js":false,"./eachHourOfInterval/index.js":false,"./eachMinuteOfInterval/index.js":false,"./eachMonthOfInterval/index.js":false,"./eachQuarterOfInterval/index.js":false,"./eachWeekOfInterval/index.js":false,"./eachWeekendOfInterval/index.js":false,"./eachWeekendOfMonth/index.js":false,"./eachWeekendOfYear/index.js":false,"./eachYearOfInterval/index.js":false,"./endOfDay/index.js":"kLkh7","./endOfDecade/index.js":false,"./endOfHour/index.js":false,"./endOfISOWeek/index.js":false,"./endOfISOWeekYear/index.js":false,"./endOfMinute/index.js":false,"./endOfMonth/index.js":"4tHlS","./endOfQuarter/index.js":false,"./endOfSecond/index.js":false,"./endOfToday/index.js":false,"./endOfTomorrow/index.js":false,"./endOfWeek/index.js":false,"./endOfYear/index.js":false,"./endOfYesterday/index.js":false,"./format/index.js":"lnm6V","./formatDistance/index.js":"lPnhm","./formatDistanceStrict/index.js":"gN5ZD","./formatDistanceToNow/index.js":"kV5oc","./formatDistanceToNowStrict/index.js":"9FmDM","./formatDuration/index.js":false,"./formatISO/index.js":false,"./formatISO9075/index.js":false,"./formatISODuration/index.js":false,"./formatRFC3339/index.js":false,"./formatRFC7231/index.js":false,"./formatRelative/index.js":false,"./fromUnixTime/index.js":false,"./getDate/index.js":false,"./getDay/index.js":false,"./getDayOfYear/index.js":false,"./getDaysInMonth/index.js":false,"./getDaysInYear/index.js":false,"./getDecade/index.js":false,"./getHours/index.js":false,"./getISODay/index.js":false,"./getISOWeek/index.js":false,"./getISOWeekYear/index.js":false,"./getISOWeeksInYear/index.js":false,"./getMilliseconds/index.js":false,"./getMinutes/index.js":false,"./getMonth/index.js":false,"./getOverlappingDaysInIntervals/index.js":false,"./getQuarter/index.js":false,"./getSeconds/index.js":false,"./getTime/index.js":false,"./getUnixTime/index.js":false,"./getWeek/index.js":false,"./getWeekOfMonth/index.js":false,"./getWeekYear/index.js":false,"./getWeeksInMonth/index.js":false,"./getYear/index.js":false,"./hoursToMilliseconds/index.js":false,"./hoursToMinutes/index.js":false,"./hoursToSeconds/index.js":false,"./intervalToDuration/index.js":"5hNtu","./intlFormat/index.js":false,"./isAfter/index.js":false,"./isBefore/index.js":false,"./isDate/index.js":"kqNhT","./isEqual/index.js":false,"./isExists/index.js":false,"./isFirstDayOfMonth/index.js":false,"./isFriday/index.js":false,"./isFuture/index.js":false,"./isLastDayOfMonth/index.js":"1as6x","./isLeapYear/index.js":false,"./isMatch/index.js":false,"./isMonday/index.js":false,"./isPast/index.js":false,"./isSameDay/index.js":false,"./isSameHour/index.js":false,"./isSameISOWeek/index.js":false,"./isSameISOWeekYear/index.js":false,"./isSameMinute/index.js":false,"./isSameMonth/index.js":false,"./isSameQuarter/index.js":false,"./isSameSecond/index.js":false,"./isSameWeek/index.js":false,"./isSameYear/index.js":false,"./isSaturday/index.js":false,"./isSunday/index.js":false,"./isThisHour/index.js":false,"./isThisISOWeek/index.js":false,"./isThisMinute/index.js":false,"./isThisMonth/index.js":false,"./isThisQuarter/index.js":false,"./isThisSecond/index.js":false,"./isThisWeek/index.js":false,"./isThisYear/index.js":false,"./isThursday/index.js":false,"./isToday/index.js":false,"./isTomorrow/index.js":false,"./isTuesday/index.js":false,"./isValid/index.js":"eXoMl","./isWednesday/index.js":false,"./isWeekend/index.js":false,"./isWithinInterval/index.js":false,"./isYesterday/index.js":false,"./lastDayOfDecade/index.js":false,"./lastDayOfISOWeek/index.js":false,"./lastDayOfISOWeekYear/index.js":false,"./lastDayOfMonth/index.js":false,"./lastDayOfQuarter/index.js":false,"./lastDayOfWeek/index.js":false,"./lastDayOfYear/index.js":false,"./lightFormat/index.js":false,"./max/index.js":false,"./milliseconds/index.js":false,"./millisecondsToHours/index.js":false,"./millisecondsToMinutes/index.js":false,"./millisecondsToSeconds/index.js":false,"./min/index.js":false,"./minutesToHours/index.js":false,"./minutesToMilliseconds/index.js":false,"./minutesToSeconds/index.js":false,"./monthsToQuarters/index.js":false,"./monthsToYears/index.js":false,"./nextDay/index.js":false,"./nextFriday/index.js":false,"./nextMonday/index.js":false,"./nextSaturday/index.js":false,"./nextSunday/index.js":false,"./nextThursday/index.js":false,"./nextTuesday/index.js":false,"./nextWednesday/index.js":false,"./parse/index.js":false,"./parseISO/index.js":"3UpeK","./parseJSON/index.js":false,"./previousDay/index.js":false,"./previousFriday/index.js":false,"./previousMonday/index.js":false,"./previousSaturday/index.js":false,"./previousSunday/index.js":false,"./previousThursday/index.js":false,"./previousTuesday/index.js":false,"./previousWednesday/index.js":false,"./quartersToMonths/index.js":false,"./quartersToYears/index.js":false,"./roundToNearestMinutes/index.js":false,"./secondsToHours/index.js":false,"./secondsToMilliseconds/index.js":false,"./secondsToMinutes/index.js":false,"./set/index.js":false,"./setDate/index.js":false,"./setDay/index.js":false,"./setDayOfYear/index.js":false,"./setHours/index.js":false,"./setISODay/index.js":false,"./setISOWeek/index.js":false,"./setISOWeekYear/index.js":false,"./setMilliseconds/index.js":false,"./setMinutes/index.js":false,"./setMonth/index.js":false,"./setQuarter/index.js":false,"./setSeconds/index.js":false,"./setWeek/index.js":false,"./setWeekYear/index.js":false,"./setYear/index.js":false,"./startOfDay/index.js":"4Tvs3","./startOfDecade/index.js":false,"./startOfHour/index.js":false,"./startOfISOWeek/index.js":false,"./startOfISOWeekYear/index.js":false,"./startOfMinute/index.js":false,"./startOfMonth/index.js":false,"./startOfQuarter/index.js":false,"./startOfSecond/index.js":false,"./startOfToday/index.js":false,"./startOfTomorrow/index.js":false,"./startOfWeek/index.js":false,"./startOfWeekYear/index.js":false,"./startOfYear/index.js":false,"./startOfYesterday/index.js":false,"./sub/index.js":"lF4Wf","./subBusinessDays/index.js":false,"./subDays/index.js":"8gyqn","./subHours/index.js":false,"./subISOWeekYears/index.js":false,"./subMilliseconds/index.js":"lL2M9","./subMinutes/index.js":false,"./subMonths/index.js":"8bL71","./subQuarters/index.js":false,"./subSeconds/index.js":false,"./subWeeks/index.js":false,"./subYears/index.js":false,"./toDate/index.js":"fsust","./weeksToDays/index.js":false,"./yearsToMonths/index.js":false,"./yearsToQuarters/index.js":false,"./constants/index.js":"iOhcx","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"g6fAH":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _indexJs = require("../_lib/toInteger/index.js");
@@ -1488,13 +1493,17 @@ var _indexJs1 = require("../toDate/index.js");
 var _indexJsDefault1 = parcelHelpers.interopDefault(_indexJs1);
 var _indexJs2 = require("../_lib/requiredArgs/index.js");
 var _indexJsDefault2 = parcelHelpers.interopDefault(_indexJs2);
-function addMilliseconds(dirtyDate, dirtyAmount) {
+function addDays(dirtyDate, dirtyAmount) {
     _indexJsDefault2.default(2, arguments);
-    var timestamp = _indexJsDefault1.default(dirtyDate).getTime();
+    var date = _indexJsDefault1.default(dirtyDate);
     var amount = _indexJsDefault.default(dirtyAmount);
-    return new Date(timestamp + amount);
+    if (isNaN(amount)) return new Date(NaN);
+    if (!amount) // If 0 days, no-op to avoid changing times in the hour before end of DST
+    return date;
+    date.setDate(date.getDate() + amount);
+    return date;
 }
-exports.default = addMilliseconds;
+exports.default = addDays;
 
 },{"../_lib/toInteger/index.js":"f7kKX","../toDate/index.js":"fsust","../_lib/requiredArgs/index.js":"9wUgQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"f7kKX":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -1567,7 +1576,68 @@ function requiredArgs(required, args) {
 }
 exports.default = requiredArgs;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"h01l4":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7Tp9s":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _indexJs = require("../_lib/toInteger/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+var _indexJs1 = require("../toDate/index.js");
+var _indexJsDefault1 = parcelHelpers.interopDefault(_indexJs1);
+var _indexJs2 = require("../_lib/requiredArgs/index.js");
+var _indexJsDefault2 = parcelHelpers.interopDefault(_indexJs2);
+function addMilliseconds(dirtyDate, dirtyAmount) {
+    _indexJsDefault2.default(2, arguments);
+    var timestamp = _indexJsDefault1.default(dirtyDate).getTime();
+    var amount = _indexJsDefault.default(dirtyAmount);
+    return new Date(timestamp + amount);
+}
+exports.default = addMilliseconds;
+
+},{"../_lib/toInteger/index.js":"f7kKX","../toDate/index.js":"fsust","../_lib/requiredArgs/index.js":"9wUgQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hES3W":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _indexJs = require("../_lib/toInteger/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+var _indexJs1 = require("../toDate/index.js");
+var _indexJsDefault1 = parcelHelpers.interopDefault(_indexJs1);
+var _indexJs2 = require("../_lib/requiredArgs/index.js");
+var _indexJsDefault2 = parcelHelpers.interopDefault(_indexJs2);
+function addMonths(dirtyDate, dirtyAmount) {
+    _indexJsDefault2.default(2, arguments);
+    var date = _indexJsDefault1.default(dirtyDate);
+    var amount = _indexJsDefault.default(dirtyAmount);
+    if (isNaN(amount)) return new Date(NaN);
+    if (!amount) // If 0 months, no-op to avoid changing times in the hour before end of DST
+    return date;
+    var dayOfMonth = date.getDate(); // The JS Date object supports date math by accepting out-of-bounds values for
+    // month, day, etc. For example, new Date(2020, 0, 0) returns 31 Dec 2019 and
+    // new Date(2020, 13, 1) returns 1 Feb 2021.  This is *almost* the behavior we
+    // want except that dates will wrap around the end of a month, meaning that
+    // new Date(2020, 13, 31) will return 3 Mar 2021 not 28 Feb 2021 as desired. So
+    // we'll default to the end of the desired month by adding 1 to the desired
+    // month and using a date of 0 to back up one day to the end of the desired
+    // month.
+    var endOfDesiredMonth = new Date(date.getTime());
+    endOfDesiredMonth.setMonth(date.getMonth() + amount + 1, 0);
+    var daysInMonth = endOfDesiredMonth.getDate();
+    if (dayOfMonth >= daysInMonth) // If we're already at the end of the month, then this is the correct date
+    // and we're done.
+    return endOfDesiredMonth;
+    else {
+        // Otherwise, we now know that setting the original day-of-month value won't
+        // cause an overflow, so set the desired day-of-month. Note that we can't
+        // just set the date of `endOfDesiredMonth` because that object may have had
+        // its time changed in the unusual case where where a DST transition was on
+        // the last day of the month and its local time was in the hour skipped or
+        // repeated next to a DST transition.  So we use `date` instead which is
+        // guaranteed to still have the original time.
+        date.setFullYear(endOfDesiredMonth.getFullYear(), endOfDesiredMonth.getMonth(), dayOfMonth);
+        return date;
+    }
+}
+exports.default = addMonths;
+
+},{"../_lib/toInteger/index.js":"f7kKX","../toDate/index.js":"fsust","../_lib/requiredArgs/index.js":"9wUgQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"h01l4":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _indexJs = require("../toDate/index.js");
@@ -1584,6 +1654,53 @@ function compareAsc(dirtyDateLeft, dirtyDateRight) {
     else return diff;
 }
 exports.default = compareAsc;
+
+},{"../toDate/index.js":"fsust","../_lib/requiredArgs/index.js":"9wUgQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"adZXy":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _indexJs = require("../_lib/getTimezoneOffsetInMilliseconds/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+var _indexJs1 = require("../startOfDay/index.js");
+var _indexJsDefault1 = parcelHelpers.interopDefault(_indexJs1);
+var _indexJs2 = require("../_lib/requiredArgs/index.js");
+var _indexJsDefault2 = parcelHelpers.interopDefault(_indexJs2);
+var MILLISECONDS_IN_DAY = 86400000;
+function differenceInCalendarDays(dirtyDateLeft, dirtyDateRight) {
+    _indexJsDefault2.default(2, arguments);
+    var startOfDayLeft = _indexJsDefault1.default(dirtyDateLeft);
+    var startOfDayRight = _indexJsDefault1.default(dirtyDateRight);
+    var timestampLeft = startOfDayLeft.getTime() - _indexJsDefault.default(startOfDayLeft);
+    var timestampRight = startOfDayRight.getTime() - _indexJsDefault.default(startOfDayRight); // Round the number of days to the nearest integer
+    // because the number of milliseconds in a day is not constant
+    // (e.g. it's different in the day of the daylight saving time clock shift)
+    return Math.round((timestampLeft - timestampRight) / MILLISECONDS_IN_DAY);
+}
+exports.default = differenceInCalendarDays;
+
+},{"../_lib/getTimezoneOffsetInMilliseconds/index.js":"bc74C","../startOfDay/index.js":"4Tvs3","../_lib/requiredArgs/index.js":"9wUgQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bc74C":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+function getTimezoneOffsetInMilliseconds(date) {
+    var utcDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()));
+    utcDate.setUTCFullYear(date.getFullYear());
+    return date.getTime() - utcDate.getTime();
+}
+exports.default = getTimezoneOffsetInMilliseconds;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4Tvs3":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _indexJs = require("../toDate/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+var _indexJs1 = require("../_lib/requiredArgs/index.js");
+var _indexJsDefault1 = parcelHelpers.interopDefault(_indexJs1);
+function startOfDay(dirtyDate) {
+    _indexJsDefault1.default(1, arguments);
+    var date = _indexJsDefault.default(dirtyDate);
+    date.setHours(0, 0, 0, 0);
+    return date;
+}
+exports.default = startOfDay;
 
 },{"../toDate/index.js":"fsust","../_lib/requiredArgs/index.js":"9wUgQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8oypH":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -1602,7 +1719,110 @@ function differenceInCalendarMonths(dirtyDateLeft, dirtyDateRight) {
 }
 exports.default = differenceInCalendarMonths;
 
-},{"../toDate/index.js":"fsust","../_lib/requiredArgs/index.js":"9wUgQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"Eb6qZ":[function(require,module,exports) {
+},{"../toDate/index.js":"fsust","../_lib/requiredArgs/index.js":"9wUgQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"f4WIY":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _indexJs = require("../toDate/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+var _indexJs1 = require("../_lib/requiredArgs/index.js");
+var _indexJsDefault1 = parcelHelpers.interopDefault(_indexJs1);
+function differenceInCalendarYears(dirtyDateLeft, dirtyDateRight) {
+    _indexJsDefault1.default(2, arguments);
+    var dateLeft = _indexJsDefault.default(dirtyDateLeft);
+    var dateRight = _indexJsDefault.default(dirtyDateRight);
+    return dateLeft.getFullYear() - dateRight.getFullYear();
+}
+exports.default = differenceInCalendarYears;
+
+},{"../toDate/index.js":"fsust","../_lib/requiredArgs/index.js":"9wUgQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1mpAo":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _indexJs = require("../toDate/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+var _indexJs1 = require("../differenceInCalendarDays/index.js");
+var _indexJsDefault1 = parcelHelpers.interopDefault(_indexJs1);
+var _indexJs2 = require("../_lib/requiredArgs/index.js"); // Like `compareAsc` but uses local time not UTC, which is needed
+var _indexJsDefault2 = parcelHelpers.interopDefault(_indexJs2);
+// for accurate equality comparisons of UTC timestamps that end up
+// having the same representation in local time, e.g. one hour before
+// DST ends vs. the instant that DST ends.
+function compareLocalAsc(dateLeft, dateRight) {
+    var diff = dateLeft.getFullYear() - dateRight.getFullYear() || dateLeft.getMonth() - dateRight.getMonth() || dateLeft.getDate() - dateRight.getDate() || dateLeft.getHours() - dateRight.getHours() || dateLeft.getMinutes() - dateRight.getMinutes() || dateLeft.getSeconds() - dateRight.getSeconds() || dateLeft.getMilliseconds() - dateRight.getMilliseconds();
+    if (diff < 0) return -1;
+    else if (diff > 0) return 1; // Return 0 if diff is 0; return NaN if diff is NaN
+    else return diff;
+}
+function differenceInDays(dirtyDateLeft, dirtyDateRight) {
+    _indexJsDefault2.default(2, arguments);
+    var dateLeft = _indexJsDefault.default(dirtyDateLeft);
+    var dateRight = _indexJsDefault.default(dirtyDateRight);
+    var sign = compareLocalAsc(dateLeft, dateRight);
+    var difference = Math.abs(_indexJsDefault1.default(dateLeft, dateRight));
+    dateLeft.setDate(dateLeft.getDate() - sign * difference); // Math.abs(diff in full days - diff in calendar days) === 1 if last calendar day is not full
+    // If so, result must be decreased by 1 in absolute value
+    var isLastDayNotFull = Number(compareLocalAsc(dateLeft, dateRight) === -sign);
+    var result = sign * (difference - isLastDayNotFull); // Prevent negative zero
+    return result === 0 ? 0 : result;
+}
+exports.default = differenceInDays;
+
+},{"../toDate/index.js":"fsust","../differenceInCalendarDays/index.js":"adZXy","../_lib/requiredArgs/index.js":"9wUgQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9Vac7":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _indexJs = require("../constants/index.js");
+var _indexJs1 = require("../differenceInMilliseconds/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs1);
+var _indexJs2 = require("../_lib/requiredArgs/index.js");
+var _indexJsDefault1 = parcelHelpers.interopDefault(_indexJs2);
+var _indexJs3 = require("../_lib/roundingMethods/index.js");
+function differenceInHours(dateLeft, dateRight, options) {
+    _indexJsDefault1.default(2, arguments);
+    var diff = _indexJsDefault.default(dateLeft, dateRight) / _indexJs.millisecondsInHour;
+    return _indexJs3.getRoundingMethod(options === null || options === void 0 ? void 0 : options.roundingMethod)(diff);
+}
+exports.default = differenceInHours;
+
+},{"../constants/index.js":"iOhcx","../differenceInMilliseconds/index.js":"Eb6qZ","../_lib/requiredArgs/index.js":"9wUgQ","../_lib/roundingMethods/index.js":"ilPgA","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iOhcx":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "daysInWeek", ()=>daysInWeek
+);
+parcelHelpers.export(exports, "maxTime", ()=>maxTime
+);
+parcelHelpers.export(exports, "millisecondsInMinute", ()=>millisecondsInMinute
+);
+parcelHelpers.export(exports, "millisecondsInHour", ()=>millisecondsInHour
+);
+parcelHelpers.export(exports, "millisecondsInSecond", ()=>millisecondsInSecond
+);
+parcelHelpers.export(exports, "minTime", ()=>minTime
+);
+parcelHelpers.export(exports, "minutesInHour", ()=>minutesInHour
+);
+parcelHelpers.export(exports, "monthsInQuarter", ()=>monthsInQuarter
+);
+parcelHelpers.export(exports, "monthsInYear", ()=>monthsInYear
+);
+parcelHelpers.export(exports, "quartersInYear", ()=>quartersInYear
+);
+parcelHelpers.export(exports, "secondsInHour", ()=>secondsInHour
+);
+parcelHelpers.export(exports, "secondsInMinute", ()=>secondsInMinute
+);
+var daysInWeek = 7;
+var maxTime = Math.pow(10, 8) * 86400000;
+var millisecondsInMinute = 60000;
+var millisecondsInHour = 3600000;
+var millisecondsInSecond = 1000;
+var minTime = -maxTime;
+var minutesInHour = 60;
+var monthsInQuarter = 3;
+var monthsInYear = 12;
+var quartersInYear = 4;
+var secondsInHour = 3600;
+var secondsInMinute = 60;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"Eb6qZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _indexJs = require("../toDate/index.js");
@@ -1615,7 +1835,41 @@ function differenceInMilliseconds(dateLeft, dateRight) {
 }
 exports.default = differenceInMilliseconds;
 
-},{"../toDate/index.js":"fsust","../_lib/requiredArgs/index.js":"9wUgQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8lj6Z":[function(require,module,exports) {
+},{"../toDate/index.js":"fsust","../_lib/requiredArgs/index.js":"9wUgQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ilPgA":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getRoundingMethod", ()=>getRoundingMethod
+);
+var roundingMap = {
+    ceil: Math.ceil,
+    round: Math.round,
+    floor: Math.floor,
+    trunc: function(value) {
+        return value < 0 ? Math.ceil(value) : Math.floor(value);
+    } // Math.trunc is not supported by IE
+};
+var defaultRoundingMethod = 'trunc';
+function getRoundingMethod(method) {
+    return method ? roundingMap[method] : roundingMap[defaultRoundingMethod];
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4Qv17":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _indexJs = require("../constants/index.js");
+var _indexJs1 = require("../differenceInMilliseconds/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs1);
+var _indexJs2 = require("../_lib/requiredArgs/index.js");
+var _indexJsDefault1 = parcelHelpers.interopDefault(_indexJs2);
+var _indexJs3 = require("../_lib/roundingMethods/index.js");
+function differenceInMinutes(dateLeft, dateRight, options) {
+    _indexJsDefault1.default(2, arguments);
+    var diff = _indexJsDefault.default(dateLeft, dateRight) / _indexJs.millisecondsInMinute;
+    return _indexJs3.getRoundingMethod(options === null || options === void 0 ? void 0 : options.roundingMethod)(diff);
+}
+exports.default = differenceInMinutes;
+
+},{"../constants/index.js":"iOhcx","../differenceInMilliseconds/index.js":"Eb6qZ","../_lib/requiredArgs/index.js":"9wUgQ","../_lib/roundingMethods/index.js":"ilPgA","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8lj6Z":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _indexJs = require("../toDate/index.js");
@@ -1715,25 +1969,34 @@ function differenceInSeconds(dateLeft, dateRight, options) {
 }
 exports.default = differenceInSeconds;
 
-},{"../differenceInMilliseconds/index.js":"Eb6qZ","../_lib/requiredArgs/index.js":"9wUgQ","../_lib/roundingMethods/index.js":"ilPgA","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ilPgA":[function(require,module,exports) {
+},{"../differenceInMilliseconds/index.js":"Eb6qZ","../_lib/requiredArgs/index.js":"9wUgQ","../_lib/roundingMethods/index.js":"ilPgA","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2tncr":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "getRoundingMethod", ()=>getRoundingMethod
-);
-var roundingMap = {
-    ceil: Math.ceil,
-    round: Math.round,
-    floor: Math.floor,
-    trunc: function(value) {
-        return value < 0 ? Math.ceil(value) : Math.floor(value);
-    } // Math.trunc is not supported by IE
-};
-var defaultRoundingMethod = 'trunc';
-function getRoundingMethod(method) {
-    return method ? roundingMap[method] : roundingMap[defaultRoundingMethod];
+var _indexJs = require("../toDate/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+var _indexJs1 = require("../differenceInCalendarYears/index.js");
+var _indexJsDefault1 = parcelHelpers.interopDefault(_indexJs1);
+var _indexJs2 = require("../compareAsc/index.js");
+var _indexJsDefault2 = parcelHelpers.interopDefault(_indexJs2);
+var _indexJs3 = require("../_lib/requiredArgs/index.js");
+var _indexJsDefault3 = parcelHelpers.interopDefault(_indexJs3);
+function differenceInYears(dirtyDateLeft, dirtyDateRight) {
+    _indexJsDefault3.default(2, arguments);
+    var dateLeft = _indexJsDefault.default(dirtyDateLeft);
+    var dateRight = _indexJsDefault.default(dirtyDateRight);
+    var sign = _indexJsDefault2.default(dateLeft, dateRight);
+    var difference = Math.abs(_indexJsDefault1.default(dateLeft, dateRight)); // Set both dates to a valid leap year for accurate comparison when dealing
+    // with leap days
+    dateLeft.setFullYear(1584);
+    dateRight.setFullYear(1584); // Math.abs(diff in full years - diff in calendar years) === 1 if last calendar year is not full
+    // If so, result must be decreased by 1 in absolute value
+    var isLastYearNotFull = _indexJsDefault2.default(dateLeft, dateRight) === -sign;
+    var result = sign * (difference - Number(isLastYearNotFull)); // Prevent negative zero
+    return result === 0 ? 0 : result;
 }
+exports.default = differenceInYears;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lnm6V":[function(require,module,exports) {
+},{"../toDate/index.js":"fsust","../differenceInCalendarYears/index.js":"f4WIY","../compareAsc/index.js":"h01l4","../_lib/requiredArgs/index.js":"9wUgQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lnm6V":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _indexJs = require("../isValid/index.js");
@@ -3667,16 +3930,6 @@ var longFormatters = {
 };
 exports.default = longFormatters;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bc74C":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-function getTimezoneOffsetInMilliseconds(date) {
-    var utcDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()));
-    utcDate.setUTCFullYear(date.getFullYear());
-    return date.getTime() - utcDate.getTime();
-}
-exports.default = getTimezoneOffsetInMilliseconds;
-
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4R0Xq":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -3925,47 +4178,318 @@ function formatDistanceToNowStrict(dirtyDate, dirtyOptions) {
 }
 exports.default = formatDistanceToNowStrict;
 
-},{"../formatDistanceStrict/index.js":"gN5ZD","../_lib/requiredArgs/index.js":"9wUgQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iOhcx":[function(require,module,exports) {
+},{"../formatDistanceStrict/index.js":"gN5ZD","../_lib/requiredArgs/index.js":"9wUgQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5hNtu":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "daysInWeek", ()=>daysInWeek
-);
-parcelHelpers.export(exports, "maxTime", ()=>maxTime
-);
-parcelHelpers.export(exports, "millisecondsInMinute", ()=>millisecondsInMinute
-);
-parcelHelpers.export(exports, "millisecondsInHour", ()=>millisecondsInHour
-);
-parcelHelpers.export(exports, "millisecondsInSecond", ()=>millisecondsInSecond
-);
-parcelHelpers.export(exports, "minTime", ()=>minTime
-);
-parcelHelpers.export(exports, "minutesInHour", ()=>minutesInHour
-);
-parcelHelpers.export(exports, "monthsInQuarter", ()=>monthsInQuarter
-);
-parcelHelpers.export(exports, "monthsInYear", ()=>monthsInYear
-);
-parcelHelpers.export(exports, "quartersInYear", ()=>quartersInYear
-);
-parcelHelpers.export(exports, "secondsInHour", ()=>secondsInHour
-);
-parcelHelpers.export(exports, "secondsInMinute", ()=>secondsInMinute
-);
-var daysInWeek = 7;
-var maxTime = Math.pow(10, 8) * 86400000;
-var millisecondsInMinute = 60000;
-var millisecondsInHour = 3600000;
-var millisecondsInSecond = 1000;
-var minTime = -maxTime;
-var minutesInHour = 60;
-var monthsInQuarter = 3;
-var monthsInYear = 12;
-var quartersInYear = 4;
-var secondsInHour = 3600;
-var secondsInMinute = 60;
+var _indexJs = require("../compareAsc/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+var _indexJs1 = require("../differenceInYears/index.js");
+var _indexJsDefault1 = parcelHelpers.interopDefault(_indexJs1);
+var _indexJs2 = require("../differenceInMonths/index.js");
+var _indexJsDefault2 = parcelHelpers.interopDefault(_indexJs2);
+var _indexJs3 = require("../differenceInDays/index.js");
+var _indexJsDefault3 = parcelHelpers.interopDefault(_indexJs3);
+var _indexJs4 = require("../differenceInHours/index.js");
+var _indexJsDefault4 = parcelHelpers.interopDefault(_indexJs4);
+var _indexJs5 = require("../differenceInMinutes/index.js");
+var _indexJsDefault5 = parcelHelpers.interopDefault(_indexJs5);
+var _indexJs6 = require("../differenceInSeconds/index.js");
+var _indexJsDefault6 = parcelHelpers.interopDefault(_indexJs6);
+var _indexJs7 = require("../isValid/index.js");
+var _indexJsDefault7 = parcelHelpers.interopDefault(_indexJs7);
+var _indexJs8 = require("../_lib/requiredArgs/index.js");
+var _indexJsDefault8 = parcelHelpers.interopDefault(_indexJs8);
+var _indexJs9 = require("../toDate/index.js");
+var _indexJsDefault9 = parcelHelpers.interopDefault(_indexJs9);
+var _indexJs10 = require("../sub/index.js");
+var _indexJsDefault10 = parcelHelpers.interopDefault(_indexJs10);
+function intervalToDuration(_ref) {
+    var start = _ref.start, end = _ref.end;
+    _indexJsDefault8.default(1, arguments);
+    var dateLeft = _indexJsDefault9.default(start);
+    var dateRight = _indexJsDefault9.default(end);
+    if (!_indexJsDefault7.default(dateLeft)) throw new RangeError('Start Date is invalid');
+    if (!_indexJsDefault7.default(dateRight)) throw new RangeError('End Date is invalid');
+    var duration = {
+        years: 0,
+        months: 0,
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0
+    };
+    var sign = _indexJsDefault.default(dateLeft, dateRight);
+    duration.years = Math.abs(_indexJsDefault1.default(dateLeft, dateRight));
+    var remainingMonths = _indexJsDefault10.default(dateLeft, {
+        years: sign * duration.years
+    });
+    duration.months = Math.abs(_indexJsDefault2.default(remainingMonths, dateRight));
+    var remainingDays = _indexJsDefault10.default(remainingMonths, {
+        months: sign * duration.months
+    });
+    duration.days = Math.abs(_indexJsDefault3.default(remainingDays, dateRight));
+    var remainingHours = _indexJsDefault10.default(remainingDays, {
+        days: sign * duration.days
+    });
+    duration.hours = Math.abs(_indexJsDefault4.default(remainingHours, dateRight));
+    var remainingMinutes = _indexJsDefault10.default(remainingHours, {
+        hours: sign * duration.hours
+    });
+    duration.minutes = Math.abs(_indexJsDefault5.default(remainingMinutes, dateRight));
+    var remainingSeconds = _indexJsDefault10.default(remainingMinutes, {
+        minutes: sign * duration.minutes
+    });
+    duration.seconds = Math.abs(_indexJsDefault6.default(remainingSeconds, dateRight));
+    return duration;
+}
+exports.default = intervalToDuration;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2GA9o":[function(require,module,exports) {
+},{"../compareAsc/index.js":"h01l4","../differenceInYears/index.js":"2tncr","../differenceInMonths/index.js":"8lj6Z","../differenceInDays/index.js":"1mpAo","../differenceInHours/index.js":"9Vac7","../differenceInMinutes/index.js":"4Qv17","../differenceInSeconds/index.js":"5uZgU","../isValid/index.js":"eXoMl","../_lib/requiredArgs/index.js":"9wUgQ","../toDate/index.js":"fsust","../sub/index.js":"lF4Wf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lF4Wf":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _indexJs = require("../subDays/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+var _indexJs1 = require("../subMonths/index.js");
+var _indexJsDefault1 = parcelHelpers.interopDefault(_indexJs1);
+var _indexJs2 = require("../_lib/requiredArgs/index.js");
+var _indexJsDefault2 = parcelHelpers.interopDefault(_indexJs2);
+var _indexJs3 = require("../_lib/toInteger/index.js");
+var _indexJsDefault3 = parcelHelpers.interopDefault(_indexJs3);
+function sub(date, duration) {
+    _indexJsDefault2.default(2, arguments);
+    if (!duration || typeof duration !== 'object') return new Date(NaN);
+    var years = duration.years ? _indexJsDefault3.default(duration.years) : 0;
+    var months = duration.months ? _indexJsDefault3.default(duration.months) : 0;
+    var weeks = duration.weeks ? _indexJsDefault3.default(duration.weeks) : 0;
+    var days = duration.days ? _indexJsDefault3.default(duration.days) : 0;
+    var hours = duration.hours ? _indexJsDefault3.default(duration.hours) : 0;
+    var minutes = duration.minutes ? _indexJsDefault3.default(duration.minutes) : 0;
+    var seconds = duration.seconds ? _indexJsDefault3.default(duration.seconds) : 0; // Subtract years and months
+    var dateWithoutMonths = _indexJsDefault1.default(date, months + years * 12); // Subtract weeks and days
+    var dateWithoutDays = _indexJsDefault.default(dateWithoutMonths, days + weeks * 7); // Subtract hours, minutes and seconds
+    var minutestoSub = minutes + hours * 60;
+    var secondstoSub = seconds + minutestoSub * 60;
+    var mstoSub = secondstoSub * 1000;
+    var finalDate = new Date(dateWithoutDays.getTime() - mstoSub);
+    return finalDate;
+}
+exports.default = sub;
+
+},{"../subDays/index.js":"8gyqn","../subMonths/index.js":"8bL71","../_lib/requiredArgs/index.js":"9wUgQ","../_lib/toInteger/index.js":"f7kKX","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8gyqn":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _indexJs = require("../_lib/toInteger/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+var _indexJs1 = require("../addDays/index.js");
+var _indexJsDefault1 = parcelHelpers.interopDefault(_indexJs1);
+var _indexJs2 = require("../_lib/requiredArgs/index.js");
+var _indexJsDefault2 = parcelHelpers.interopDefault(_indexJs2);
+function subDays(dirtyDate, dirtyAmount) {
+    _indexJsDefault2.default(2, arguments);
+    var amount = _indexJsDefault.default(dirtyAmount);
+    return _indexJsDefault1.default(dirtyDate, -amount);
+}
+exports.default = subDays;
+
+},{"../_lib/toInteger/index.js":"f7kKX","../addDays/index.js":"g6fAH","../_lib/requiredArgs/index.js":"9wUgQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8bL71":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _indexJs = require("../_lib/toInteger/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+var _indexJs1 = require("../addMonths/index.js");
+var _indexJsDefault1 = parcelHelpers.interopDefault(_indexJs1);
+var _indexJs2 = require("../_lib/requiredArgs/index.js");
+var _indexJsDefault2 = parcelHelpers.interopDefault(_indexJs2);
+function subMonths(dirtyDate, dirtyAmount) {
+    _indexJsDefault2.default(2, arguments);
+    var amount = _indexJsDefault.default(dirtyAmount);
+    return _indexJsDefault1.default(dirtyDate, -amount);
+}
+exports.default = subMonths;
+
+},{"../_lib/toInteger/index.js":"f7kKX","../addMonths/index.js":"hES3W","../_lib/requiredArgs/index.js":"9wUgQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3UpeK":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _indexJs = require("../constants/index.js");
+var _indexJs1 = require("../_lib/requiredArgs/index.js");
+var _indexJsDefault = parcelHelpers.interopDefault(_indexJs1);
+var _indexJs2 = require("../_lib/toInteger/index.js");
+var _indexJsDefault1 = parcelHelpers.interopDefault(_indexJs2);
+function parseISO(argument, dirtyOptions) {
+    _indexJsDefault.default(1, arguments);
+    var options = dirtyOptions || {
+    };
+    var additionalDigits = options.additionalDigits == null ? 2 : _indexJsDefault1.default(options.additionalDigits);
+    if (additionalDigits !== 2 && additionalDigits !== 1 && additionalDigits !== 0) throw new RangeError('additionalDigits must be 0, 1 or 2');
+    if (!(typeof argument === 'string' || Object.prototype.toString.call(argument) === '[object String]')) return new Date(NaN);
+    var dateStrings = splitDateString(argument);
+    var date;
+    if (dateStrings.date) {
+        var parseYearResult = parseYear(dateStrings.date, additionalDigits);
+        date = parseDate(parseYearResult.restDateString, parseYearResult.year);
+    }
+    if (!date || isNaN(date.getTime())) return new Date(NaN);
+    var timestamp = date.getTime();
+    var time = 0;
+    var offset;
+    if (dateStrings.time) {
+        time = parseTime(dateStrings.time);
+        if (isNaN(time)) return new Date(NaN);
+    }
+    if (dateStrings.timezone) {
+        offset = parseTimezone(dateStrings.timezone);
+        if (isNaN(offset)) return new Date(NaN);
+    } else {
+        var dirtyDate = new Date(timestamp + time); // js parsed string assuming it's in UTC timezone
+        // but we need it to be parsed in our timezone
+        // so we use utc values to build date in our timezone.
+        // Year values from 0 to 99 map to the years 1900 to 1999
+        // so set year explicitly with setFullYear.
+        var result = new Date(0);
+        result.setFullYear(dirtyDate.getUTCFullYear(), dirtyDate.getUTCMonth(), dirtyDate.getUTCDate());
+        result.setHours(dirtyDate.getUTCHours(), dirtyDate.getUTCMinutes(), dirtyDate.getUTCSeconds(), dirtyDate.getUTCMilliseconds());
+        return result;
+    }
+    return new Date(timestamp + time + offset);
+}
+exports.default = parseISO;
+var patterns = {
+    dateTimeDelimiter: /[T ]/,
+    timeZoneDelimiter: /[Z ]/i,
+    timezone: /([Z+-].*)$/
+};
+var dateRegex = /^-?(?:(\d{3})|(\d{2})(?:-?(\d{2}))?|W(\d{2})(?:-?(\d{1}))?|)$/;
+var timeRegex = /^(\d{2}(?:[.,]\d*)?)(?::?(\d{2}(?:[.,]\d*)?))?(?::?(\d{2}(?:[.,]\d*)?))?$/;
+var timezoneRegex = /^([+-])(\d{2})(?::?(\d{2}))?$/;
+function splitDateString(dateString) {
+    var dateStrings = {
+    };
+    var array = dateString.split(patterns.dateTimeDelimiter);
+    var timeString; // The regex match should only return at maximum two array elements.
+    // [date], [time], or [date, time].
+    if (array.length > 2) return dateStrings;
+    if (/:/.test(array[0])) timeString = array[0];
+    else {
+        dateStrings.date = array[0];
+        timeString = array[1];
+        if (patterns.timeZoneDelimiter.test(dateStrings.date)) {
+            dateStrings.date = dateString.split(patterns.timeZoneDelimiter)[0];
+            timeString = dateString.substr(dateStrings.date.length, dateString.length);
+        }
+    }
+    if (timeString) {
+        var token = patterns.timezone.exec(timeString);
+        if (token) {
+            dateStrings.time = timeString.replace(token[1], '');
+            dateStrings.timezone = token[1];
+        } else dateStrings.time = timeString;
+    }
+    return dateStrings;
+}
+function parseYear(dateString, additionalDigits) {
+    var regex = new RegExp('^(?:(\\d{4}|[+-]\\d{' + (4 + additionalDigits) + '})|(\\d{2}|[+-]\\d{' + (2 + additionalDigits) + '})$)');
+    var captures = dateString.match(regex); // Invalid ISO-formatted year
+    if (!captures) return {
+        year: NaN,
+        restDateString: ''
+    };
+    var year = captures[1] ? parseInt(captures[1]) : null;
+    var century = captures[2] ? parseInt(captures[2]) : null; // either year or century is null, not both
+    return {
+        year: century === null ? year : century * 100,
+        restDateString: dateString.slice((captures[1] || captures[2]).length)
+    };
+}
+function parseDate(dateString, year) {
+    // Invalid ISO-formatted year
+    if (year === null) return new Date(NaN);
+    var captures = dateString.match(dateRegex); // Invalid ISO-formatted string
+    if (!captures) return new Date(NaN);
+    var isWeekDate = !!captures[4];
+    var dayOfYear = parseDateUnit(captures[1]);
+    var month = parseDateUnit(captures[2]) - 1;
+    var day = parseDateUnit(captures[3]);
+    var week = parseDateUnit(captures[4]);
+    var dayOfWeek = parseDateUnit(captures[5]) - 1;
+    if (isWeekDate) {
+        if (!validateWeekDate(year, week, dayOfWeek)) return new Date(NaN);
+        return dayOfISOWeekYear(year, week, dayOfWeek);
+    } else {
+        var date = new Date(0);
+        if (!validateDate(year, month, day) || !validateDayOfYearDate(year, dayOfYear)) return new Date(NaN);
+        date.setUTCFullYear(year, month, Math.max(dayOfYear, day));
+        return date;
+    }
+}
+function parseDateUnit(value) {
+    return value ? parseInt(value) : 1;
+}
+function parseTime(timeString) {
+    var captures = timeString.match(timeRegex);
+    if (!captures) return NaN; // Invalid ISO-formatted time
+    var hours = parseTimeUnit(captures[1]);
+    var minutes = parseTimeUnit(captures[2]);
+    var seconds = parseTimeUnit(captures[3]);
+    if (!validateTime(hours, minutes, seconds)) return NaN;
+    return hours * _indexJs.millisecondsInHour + minutes * _indexJs.millisecondsInMinute + seconds * 1000;
+}
+function parseTimeUnit(value) {
+    return value && parseFloat(value.replace(',', '.')) || 0;
+}
+function parseTimezone(timezoneString) {
+    if (timezoneString === 'Z') return 0;
+    var captures = timezoneString.match(timezoneRegex);
+    if (!captures) return 0;
+    var sign = captures[1] === '+' ? -1 : 1;
+    var hours = parseInt(captures[2]);
+    var minutes = captures[3] && parseInt(captures[3]) || 0;
+    if (!validateTimezone(hours, minutes)) return NaN;
+    return sign * (hours * _indexJs.millisecondsInHour + minutes * _indexJs.millisecondsInMinute);
+}
+function dayOfISOWeekYear(isoWeekYear, week, day) {
+    var date = new Date(0);
+    date.setUTCFullYear(isoWeekYear, 0, 4);
+    var fourthOfJanuaryDay = date.getUTCDay() || 7;
+    var diff = (week - 1) * 7 + day + 1 - fourthOfJanuaryDay;
+    date.setUTCDate(date.getUTCDate() + diff);
+    return date;
+} // Validation functions
+// February is null to handle the leap year (using ||)
+var daysInMonths = [
+    31,
+    null,
+    31,
+    30,
+    31,
+    30,
+    31,
+    31,
+    30,
+    31,
+    30,
+    31
+];
+function isLeapYearIndex(year) {
+    return year % 400 === 0 || year % 4 === 0 && year % 100 !== 0;
+}
+function validateDate(year, month, date) {
+    return month >= 0 && month <= 11 && date >= 1 && date <= (daysInMonths[month] || (isLeapYearIndex(year) ? 29 : 28));
+}
+function validateDayOfYearDate(year, dayOfYear) {
+    return dayOfYear >= 1 && dayOfYear <= (isLeapYearIndex(year) ? 366 : 365);
+}
+function validateWeekDate(_year, week, day) {
+    return week >= 1 && week <= 53 && day >= 0 && day <= 6;
+}
+function validateTime(hours, minutes, seconds) {
+    if (hours === 24) return minutes === 0 && seconds === 0;
+    return seconds >= 0 && seconds < 60 && minutes >= 0 && minutes < 60 && hours >= 0 && hours < 25;
+}
+function validateTimezone(_hours, minutes) {
+    return minutes >= 0 && minutes <= 59;
+}
+
+},{"../constants/index.js":"iOhcx","../_lib/requiredArgs/index.js":"9wUgQ","../_lib/toInteger/index.js":"f7kKX","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2GA9o":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "UI", ()=>UI

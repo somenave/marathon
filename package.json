@@ -1,0 +1,29 @@
+{
+  "name": "marathon",
+  "version": "1.0.0",
+  "description": "directory for working at marathon",
+  "main": "index.js",
+  "dependencies": {
+    "eslint": "^8.8.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/somenave/marathon.git"
+  },
+  "author": "somenave",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/somenave/marathon/issues"
+  },
+  "homepage": "https://github.com/somenave/marathon#readme"
+}
