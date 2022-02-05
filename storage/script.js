@@ -1,6 +1,6 @@
 const options = {
     storageType: 'local',
-    defaultValue: null
+    defaultValue: ''
 };
 
 class Storage {
@@ -27,8 +27,9 @@ class Storage {
     }
 }
 
+
 const name = new Storage('name', { storageType: 'session', defaultValue: 'Alex' });
 
 name.set();
-console.log(name.get());
-console.log(name.isEmpty());
+console.log(name.get()); // Alex
+console.log(name.isEmpty()); // false
