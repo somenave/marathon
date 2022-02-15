@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <!--    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">-->
+    <meta content="#111111" name="theme-color">
+    <title>Chat</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main class="container">
+    <div class="top-panel">
+        <button class="settings-button button" type="button">Настройки</button>
+        <button class="profile-button button" type="button">Выйти</button>
+    </div>
+    <div class="chat">
+        <div class="message message__mine">
+            <div class="message__text message-text"><span class="message-text__from">Я:</span> Добрый день!</div>
+            <time class="message__time">18:45</time>
+        </div>
+        <div class="message">
+            <div class="message__text message-text"><span class="message-text__from">Собеседник мой:</span> Добрый день!
+            </div>
+            <time class="message__time">18:45</time>
+        </div>
+        <div class="message">
+            <div class="message__text message-text"><span class="message-text__from">Собеседник мой:</span> А это второе
+                и, кажется, оно очень
+                длинное, чтобы поместиться на
+                одной строке
+            </div>
+            <time class="message__time">18:45</time>
+        </div>
+    </div>
+    <div class="bottom-panel">
+        <input class="input button" type="text" placeholder="сообщение..">
+        <button class="send button" type="submit">-></button>
+    </div>
+</main>
+<div class="modal settings">
+    <div class="modal__container">
+        <div class="modal__top">
+            <span class="modal__label">Настройки</span>
+            <button class="modal__close" type="button">+</button>
+        </div>
+        <div class="modal__content">
+            <div class="settings__name">Имя в чате</div>
+            <div class="settings__choice">
+                <input class="input button" type="text" placeholder="" value="Стив">
+                <button class="send button" type="submit">-></button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/main.js"></script>
+</body>
+</html>
+
+
+
+

@@ -4,8 +4,8 @@ const options = {
 };
 
 class Storage {
-    constructor(key, options) {
-        this.key = key;
+    constructor(key, options = options) {
+        this.key = key ?? options.defaultValue;
         this.storageType = options.storageType === 'local' ? localStorage : sessionStorage;
         this.defaultValue = options.defaultValue;
     }
