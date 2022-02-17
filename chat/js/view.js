@@ -1,13 +1,22 @@
 export const UI = {
-  modals: document.querySelectorAll('[data-modal]'),
-  modalButtons: document.querySelectorAll('[data-modal-btn]'),
-  modalCloseButtons: document.querySelectorAll('.modal__close'),
-  chatInput: document.querySelector('.chat-input'),
-  chatBody: document.querySelector('.chat__body'),
-  messageTemplate: document.querySelector('.message-template'),
-  messageFrom: document.querySelector('.message-text__from'),
-  messageContent: document.querySelector('.message-text__content'),
-  messageTime: document.querySelector('.message__time'),
-  sendForm: document.querySelector('.send-form'),
-  sendFormInput: document.querySelector('.send-form__input')
+  MODAL: {
+    ITEMS: document.querySelectorAll('[data-modal]'),
+    BUTTONS: document.querySelectorAll('[data-modal-btn]'),
+    CLOSE_BUTTONS: document.querySelectorAll('.modal__close'),
+    ACTION_BUTTONS: document.querySelectorAll('.modal__button'),
+    PROFILE_ITEMS: document.querySelectorAll('.profile-modal'),
+    PROFILE_BUTTON: document.querySelector('.profile-button'),
+  },
+  CHAT: {
+    INPUT: document.querySelector('.chat-input'),
+    BODY: document.querySelector('.chat__body'),
+    SEND_FORM: document.querySelector('.send-form'),
+    SEND_INPUT: document.querySelector('.send-form__input'),
+  },
+  MESSAGE: {
+    TEMPLATE: document.querySelector('.message-template'),
+    AUTHOR: document.querySelector('.message-text__author'),
+    CONTENT: document.querySelector('.message-text__content'),
+    TIME: document.querySelector('.message__time'),
+  },
 }

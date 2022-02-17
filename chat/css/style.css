@@ -115,7 +115,11 @@ h5 {
 .modal__top {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 16px;
+    margin-bottom: 70px;
+}
+
+.modal__input {
+    margin-bottom: 8px;
 }
 
 .settings__name {

@@ -14,7 +14,7 @@
 <main class="container">
     <div class="top-panel">
         <button class="settings-button button" data-modal-btn="settings" type="button">Настройки</button>
-        <button class="profile-button button" type="button" data-modal-btn="profile">Выйти</button>
+        <button class="profile-button button" type="button" data-modal-btn="logout">Выйти</button>
     </div>
     <div class="chat">
         <div class="chat__body">
@@ -42,10 +42,11 @@
         <button class="send-form__button button" type="submit">-></button>
     </form>
 </main>
+
 <div class="modal settings" data-modal="settings">
     <div class="modal__container">
         <div class="modal__top">
-            <span class="modal__label">Настройки</span>
+            <span class="modal__title">Настройки</span>
             <button class="modal__close" type="button">+</button>
         </div>
         <div class="modal__content">
@@ -57,10 +58,39 @@
         </div>
     </div>
 </div>
+
+<form class="modal logout-modal profile-modal" data-modal="logout">
+    <div class="modal__container">
+        <div class="modal__top">
+            <span class="modal__title">Подтверждение</span>
+            <button class="modal__close" type="button">+</button>
+        </div>
+        <div class="modal__content">
+            <div class="modal__label">Код:</div>
+                <input class="input button chat-input modal__input" type="text" placeholder="" value="">
+                <button class="send button modal__button" data-action="logout" type="submit">Выйти</button>
+        </div>
+    </div>
+</form>
+
+<form class="modal login-modal profile-modal" data-modal="login">
+    <div class="modal__container">
+        <div class="modal__top">
+            <span class="modal__title">Авторизация</span>
+            <button class="modal__close" type="button">+</button>
+        </div>
+        <div class="modal__content">
+            <div class="modal__label">Почта:</div>
+            <input class="input button chat-input  modal__input" type="text" placeholder="" value="">
+            <button class="send button modal__button" type="submit" data-action="login">Получить код</button>
+        </div>
+    </div>
+</form>
+
 <template class="message-template">
     <div class="message message__mine">
         <div class="message__text message-text">
-            <span class="message-text__from">Я: </span>
+            <span class="message-text__author">Я: </span>
             <p class="message-text__content"></p>
         </div>
         <time class="message__time"></time>

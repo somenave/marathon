@@ -14,18 +14,20 @@ function getTime() {
 }
 
 function createMessage() {
-  const messageContent = UI.sendFormInput.value;
-  const message = UI.messageTemplate.content.cloneNode(true);
-  message.querySelector('.message-text__content').textContent = messageContent;
-  message.querySelector('.message__time').textContent = getTime();
-  UI.chatBody.append(message);
+  const messageContent = UI.CHAT.SEND_INPUT.value.trim();
+  if (messageContent) {
+    const message = UI.MESSAGE.TEMPLATE.content.cloneNode(true);
+    message.querySelector('.message-text__content').textContent = messageContent;
+    message.querySelector('.message__time').textContent = getTime();
+    UI.CHAT.BODY.append(message);
+  }
 }
 
 function sendMessageHandler() {
-  UI.sendForm.addEventListener('submit', (e) => {
+  UI.CHAT.SEND_FORM.addEventListener('submit', (e) => {
     e.preventDefault();
     createMessage();
-    UI.sendForm.reset();
+    UI.CHAT.SEND_FORM.reset();
     document.querySelector('.message:last-child').scrollIntoView();
   })
 }
