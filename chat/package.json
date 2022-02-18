@@ -1,0 +1,22 @@
+{
+  "name": "chat",
+  "version": "1.0.0",
+  "description": "chat on pure js",
+  "main": "main.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/somenave/marathon/tree/main/chat"
+  },
+  "keywords": [
+    "no"
+  ],
+  "author": "somenave",
+  "license": "ISC",
+  "devDependencies": {
+    "js-cookie": "^3.0.1",
+    "parcel": "^2.3.2"
+  }
+}
