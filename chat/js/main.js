@@ -7,11 +7,15 @@ const DEFAULT_USER_NAME = 'Я: ';
 const CHAT_API = 'https://chat1-341409.oa.r.appspot.com/api/';
 const USER_URL = CHAT_API + 'user';
 const USER_DATA_URL = CHAT_API + 'user/me';
+const MESSAGES_URL = CHAT_API + 'messages/';
 let userName = Cookies.get('username') || DEFAULT_USER_NAME;
 
 
 document.addEventListener('DOMContentLoaded', () => {
     checkAuth();
+    
+    if (Cookies.get('token')) loadHistory();
+    
     UI.MODAL.BUTTONS.forEach(modalBtn => modalBtn.addEventListener('click', () => setActiveModal(modalBtn)));
 
     UI.MODAL.CLOSE_BUTTONS.forEach(closeBtn => closeBtn.addEventListener('click', () => closeModal(closeBtn.closest('.modal'))));
@@ -47,18 +51,21 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function  getToken(email) {
-    sendRequest(USER_URL, 'POST', {email: email})
+    sendRequest(USER_URL, {method: 'POST', body: {email: email}})
         .then(console.log)
-        .catch(alert)
+        .catch(console.error)
 }
 
+// getToken('gunichdrabl@gmail.com');
+
+
 function usernameRequest(name) {
-    sendRequest(USER_URL, 'PATCH', {name: name})
+    sendRequest(USER_URL, {method: 'PATCH', body: {name: name}})
         .then(json => {
             Cookies.set('username', `${json.name}`);
             userName = `${Cookies.get('username')}: `;
         })
-        .catch(console.log)
+        .catch(console.error)
 }
 
 function getUserData() {
@@ -75,6 +82,17 @@ function getUserData() {
         .catch(console.log);
 }
 
+function loadHistory() {
+    sendRequest(MESSAGES_URL, {method: 'GET'})
+        .then(json => {
+            console.log(json)
+            json.messages.forEach(item => {
+                createMessage(`${item.username}: `, item.message, getTime(new Date(item.createdAt)));
+            })
+        })
+        .catch(console.error)
+}
+
 function checkAuth() {
     if (Cookies.get('token')) {
         UI.MODAL.PROFILE_BUTTON.setAttribute('data-modal-btn', 'logout')
@@ -84,8 +102,8 @@ function checkAuth() {
     }
 }
 
-function getTime() {
-    const date = new Date();
+function getTime(value = new Date()) {
+    const date = value;
     const hours = date.getHours();
     const minutes = '0' + date.getMinutes();
     return hours + ':' + minutes.slice(-2);
@@ -95,13 +113,13 @@ function setToken(token) {
     Cookies.set('token', token);
 }
 
-function createMessage() {
-    const messageContent = UI.CHAT.SEND_INPUT.value.trim();
-    if (messageContent) {
+function createMessage(author = userName, content = UI.CHAT.SEND_INPUT.value.trim(), time = getTime()) {
+    if (content) {
         const message = UI.MESSAGE.TEMPLATE.content.cloneNode(true);
-        message.querySelector('.message-text__author').textContent = userName;
-        message.querySelector('.message-text__content').textContent = messageContent;
-        message.querySelector('.message__time').textContent = getTime();
+        if (author === userName) message.querySelector('.message').classList.add('message__mine');
+        message.querySelector('.message-text__author').textContent = author;
+        message.querySelector('.message-text__content').textContent = content;
+        message.querySelector('.message__time').textContent = time;
         UI.CHAT.BODY.append(message);
     }
 }
