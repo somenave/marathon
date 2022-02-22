@@ -17,6 +17,7 @@ export const UI = {
         TEMPLATE: document.querySelector('.message-template'),
         AUTHOR: document.querySelector('.message-text__author'),
         CONTENT: document.querySelector('.message-text__content'),
-        TIME: document.querySelector('.message__time')
+        TIME: document.querySelector('.message__time'),
+        LAST: document.querySelector('.message:last-child')
     }
 };
