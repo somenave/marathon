@@ -2,7 +2,7 @@
 
 import { UI } from './view';
 import Cookies from 'js-cookie/dist/js.cookie.min.mjs';
-import { usernameRequest } from './requests.js';
+import { usernameRequest, getToken, loadHistory } from './requests.js';
 
 export function setActiveModal(modalBtn) {
     const activeModalName = modalBtn.getAttribute('data-modal-btn');
@@ -24,9 +24,14 @@ UI.MODAL.ITEMS.forEach(modal => {
 
         switch (modal.getAttribute('data-modal')) {
         case ('login'):
+            getToken(modal.querySelector('.modal__input').value);
+            UI.MODAL.LOGIN_CONTROL.classList.add('active');
+            break;
+        case ('login-control'):
             UI.MODAL.PROFILE_BUTTON.setAttribute('data-modal-btn', 'logout');
             UI.MODAL.PROFILE_BUTTON.textContent = 'Выйти';
             Cookies.set('token', modal.querySelector('.modal__input').value);
+            loadHistory();
             break;
         case ('settings'):
             usernameRequest(modal.querySelector('.name-input').value);
@@ -35,6 +40,7 @@ UI.MODAL.ITEMS.forEach(modal => {
             Cookies.remove('token');
             UI.MODAL.PROFILE_BUTTON.setAttribute('data-modal-btn', 'login');
             UI.MODAL.PROFILE_BUTTON.textContent = 'Войти';
+            UI.CHAT.BODY.innerHTML = '';
             break;
         }
         closeModal(modal);

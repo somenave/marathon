@@ -1,5 +1,5 @@
 import Cookies from '../node_modules/js-cookie/dist/js.cookie.min.mjs';
-import { userName } from './main.js';
+import { userName, createMessage } from './main.js';
 import { getTime } from './utils';
 
 const CHAT_API = 'https://chat1-341409.oa.r.appspot.com/api/';
@@ -25,15 +25,16 @@ export function usernameRequest(name) {
 }
 
 export function getUserData() {
-    return fetch(USER_DATA_URL, {
-        headers: { Accept: 'application/json', 'Content-Type': 'application/json;charset=utf-8', Authorization: `Bearer ${Cookies.get('token')}` },
-        method: 'GET'
-    })
-        .then(data => data.json());
+    // return fetch(USER_DATA_URL, {
+    //     headers: { Accept: 'application/json', 'Content-Type': 'application/json;charset=utf-8', Authorization: `Bearer ${Cookies.get('token')}` },
+    //     method: 'GET'
+    // })
+    //     .then(data => data.json());
+    return sendRequest(USER_DATA_URL);
 }
 
 export function getToken(email) {
-    sendRequest(USER_URL, { method: 'POST', body: { email: email } })
+    sendRequest(USER_URL, { method: 'POST', body: { email: email }, headers: { Accept: 'application/json', 'Content-Type': 'application/json;charset=utf-8' } })
         .then(console.log)
         .catch(console.error);
 }
@@ -43,7 +44,7 @@ export function loadHistory() {
         .then(json => {
             console.log(json);
             json.messages.forEach(item => {
-                createMessage({ author: item.username, content: item.message, time: getTime(new Date(item.createdAt)), isMine: (Cookies.get('user-email') === item?.email) });
+                createMessage({ author: item.user.name, content: item.text, time: getTime(new Date(item.createdAt)), isMine: Cookies.get('user-email') === item.user.email });
             });
         })
         .catch(console.error);

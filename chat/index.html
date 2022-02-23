@@ -66,9 +66,22 @@
             <button class="modal__close" type="button">+</button>
         </div>
         <div class="modal__content">
+            <div class="modal__label">Вы уверены?</div>
+            <button class="send button modal__button" data-action="logout" type="submit">Выйти</button>
+        </div>
+    </div>
+</form>
+
+<form class="modal login-control profile-modal" data-modal="login-control">
+    <div class="modal__container">
+        <div class="modal__top">
+            <span class="modal__title">Подтверждение</span>
+            <button class="modal__close" type="button">+</button>
+        </div>
+        <div class="modal__content">
             <div class="modal__label">Код:</div>
-                <input class="input button chat-input modal__input" type="text" placeholder="" value="">
-                <button class="send button modal__button" data-action="logout" type="submit">Выйти</button>
+            <input class="input button chat-input modal__input" type="text" placeholder="" value="">
+            <button class="send button modal__button" data-action="login-control" type="submit">Войти</button>
         </div>
     </div>
 </form>

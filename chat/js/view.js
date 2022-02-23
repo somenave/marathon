@@ -5,9 +5,11 @@ export const UI = {
         CLOSE_BUTTONS: document.querySelectorAll('.modal__close'),
         ACTION_BUTTONS: document.querySelectorAll('.modal__button'),
         PROFILE_ITEMS: document.querySelectorAll('.profile-modal'),
-        PROFILE_BUTTON: document.querySelector('.profile-button')
+        PROFILE_BUTTON: document.querySelector('.profile-button'),
+        LOGIN_CONTROL: document.querySelector('.login-control')
     },
     CHAT: {
+        CONTENT: document.querySelector('.chat'),
         INPUT: document.querySelector('.chat-input'),
         BODY: document.querySelector('.chat__body'),
         SEND_FORM: document.querySelector('.send-form'),

@@ -18,3 +18,7 @@ export function checkAuth() {
         setActiveModal(UI.MODAL.PROFILE_BUTTON);
     }
 }
+
+export function isAuth() {
+    return Cookies.get('token');
+}

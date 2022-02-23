@@ -118,6 +118,10 @@ h5 {
     margin-bottom: 70px;
 }
 
+.modal__label {
+    margin-bottom: 10px;
+}
+
 .modal__input {
     margin-bottom: 8px;
 }
@@ -149,7 +153,7 @@ h5 {
 
 .chat {
     height: 430px;
-    overflow: hidden auto;
+    overflow: hidden scroll;
     padding: 8px;
     background: #FFFFFF;
     border: 1px solid #000000;
