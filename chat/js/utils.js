@@ -22,3 +22,8 @@ export function checkAuth() {
 export function isAuth() {
     return Cookies.get('token');
 }
+
+export function  scrollToBottom() {
+    UI.CHAT.CONTENT.scrollTop = UI.CHAT.CONTENT.scrollHeight;
+    // UI.CHAT.CONTENT.scrollIntoView();
+}
