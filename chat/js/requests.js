@@ -1,5 +1,7 @@
 import Cookies from '../node_modules/js-cookie/dist/js.cookie.min.mjs';
 import { userName, loadPartOfMessages } from './main.js';
+import {scrollToBottom} from "./utils";
+import {UI} from "./view.js";
 
 const CHAT_API = 'https://chat1-341409.oa.r.appspot.com/api/';
 const USER_URL = CHAT_API + 'user';
@@ -34,11 +36,12 @@ export function getToken(email) {
 }
 
 export function loadHistory() {
+  UI.CHAT.BODY.innerHTML = '';
     sendRequest(MESSAGES_URL, { method: 'GET' })
         .then(response => {
             localStorage.setItem('messages', JSON.stringify(response.messages));
-            localStorage.setItem('messagesLength', response.messages.length);
-            loadPartOfMessages(response.messages.length);
+            loadPartOfMessages();
+            scrollToBottom();
         })
         .catch(console.error);
 }

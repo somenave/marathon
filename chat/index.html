@@ -18,23 +18,14 @@
     </div>
     <div class="chat">
         <div class="chat__body">
-<!--            <div class="message message__mine">
-                <div class="message__text message-text"><span class="message-text__from">Я:</span> Добрый день!</div>
-                <time class="message__time">18:45</time>
-            </div>
-            <div class="message">
-                <div class="message__text message-text"><span class="message-text__from">Собеседник мой:</span> Добрый день!
+            <template class="message">
+                <div class="message__text message-text">
+                    <span class="message-text__author">Я: </span>
+                    <p class="message-text__content"></p>
                 </div>
-                <time class="message__time">18:45</time>
-            </div>
-            <div class="message">
-                <div class="message__text message-text"><span class="message-text__from">Собеседник мой:</span> А это второе
-                    и, кажется, оно очень
-                    длинное, чтобы поместиться на
-                    одной строке
-                </div>
-                <time class="message__time">18:45</time>
-            </div>-->
+                <time class="message__time"></time>
+            </template>
+            <div class="message"></div>
         </div>
     </div>
     <form action="#" class="bottom-panel send-form">
@@ -100,15 +91,6 @@
     </div>
 </form>
 
-<template class="message-template">
-    <div class="message">
-        <div class="message__text message-text">
-            <span class="message-text__author">Я: </span>
-            <p class="message-text__content"></p>
-        </div>
-        <time class="message__time"></time>
-    </div>
-</template>
 <script src="js/main.js" type="module"></script>
 </body>
 </html>

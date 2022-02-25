@@ -1,4 +1,3 @@
-import { sendRequest } from './requests.js';
 import Cookies from 'js-cookie/dist/js.cookie.min.mjs';
 import { UI } from './view.js';
 import { setActiveModal } from './modals.js';
@@ -19,11 +18,10 @@ export function checkAuth() {
     }
 }
 
-export function isAuth() {
-    return Cookies.get('token');
-}
-
 export function  scrollToBottom() {
-    UI.CHAT.CONTENT.scrollTop = UI.CHAT.CONTENT.scrollHeight;
-    // UI.CHAT.CONTENT.scrollIntoView();
+    // UI.CHAT.BODY.scrollTop = UI.CHAT.BODY.scrollHeight;
+    if (document.querySelector('.message:last-child')) {
+        document.querySelector('.message:last-child').scrollIntoView();
+    }
+    // UI.CHAT.BODY.scrollTo(0, UI.CHAT.BODY.scrollHeight + 200);
 }
