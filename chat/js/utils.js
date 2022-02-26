@@ -18,10 +18,6 @@ export function checkAuth() {
     }
 }
 
-export function  scrollToBottom() {
-    // UI.CHAT.BODY.scrollTop = UI.CHAT.BODY.scrollHeight;
-    if (document.querySelector('.message:last-child')) {
-        document.querySelector('.message:last-child').scrollIntoView();
-    }
-    // UI.CHAT.BODY.scrollTo(0, UI.CHAT.BODY.scrollHeight + 200);
+export function scrollToBottom() {
+    UI.CHAT.BODY.scrollIntoView(false);
 }

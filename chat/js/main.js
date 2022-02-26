@@ -1,11 +1,11 @@
 import Cookies from '../node_modules/js-cookie/dist/js.cookie.min.mjs';
 import { UI } from './view.js';
-import { getUserData, getToken, loadHistory } from './requests.js';
+import { getUserData, loadHistory } from './requests.js';
 import { getTime, checkAuth, scrollToBottom } from './utils.js';
 
 export const DEFAULT_USER_NAME = 'Я';
-export const SOCKET_URL = 'ws://chat1-341409.oa.r.appspot.com/websockets?';
-export let userName = Cookies.get('username') || DEFAULT_USER_NAME;
+export const SOCKET_URL = 'wss://chat1-341409.oa.r.appspot.com/websockets?';
+export let userName = localStorage.getItem('username') || DEFAULT_USER_NAME;
 const DEFAULT_MESSAGES_COUNT = 20;
 
 export const socket = new WebSocket(`${SOCKET_URL}${Cookies.get('token')}`);
@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (Cookies.get('token')) {
         getUserData().then(data => {
-            Cookies.set('user-email', data.email);
-            Cookies.set('username', data.name);
+            localStorage.setItem('user-email', data.email);
+            localStorage.setItem('username', data.name);
         });
         loadHistory();
         scrollToBottom();
@@ -28,19 +28,19 @@ document.addEventListener('DOMContentLoaded', () => {
         UI.CHAT.SEND_FORM.reset();
         scrollToBottom();
     });
-    
+
     UI.CHAT.CONTENT.addEventListener('scroll', (e) => {
         if (e.target.scrollTop === 0) {
-            const scrollHeight = e.target.scrollHeight;
+            const prevScrollHeight = e.target.scrollHeight;
             loadPartOfMessages();
-            e.target.scrollTo(0, e.target.scrollHeight - scrollHeight);
+            e.target.scrollTo(0, e.target.scrollHeight - prevScrollHeight);
         }
     });
 });
 
 socket.onmessage = function(event) {
     try {
-        const messageData = JSON.parse(event.data);
+        const messageData = JSON.parse(event?.data);
         const message = createMessage(messageData);
         UI.CHAT.BODY.append(message);
     } catch (error) {
@@ -51,7 +51,7 @@ socket.onmessage = function(event) {
 export function createMessage(data) {
     if (!data.text) return;
     const message = UI.MESSAGE.TEMPLATE.content.cloneNode(true);
-    if ((Cookies.get('user-email') === data.user.email)) {
+    if ((localStorage.getItem('user-email') === data.user.email)) {
         message.querySelector('.message').classList.add('message__mine');
     }
     message.querySelector('.message-text__author').textContent = `${data.user.name}: `;
@@ -66,12 +66,17 @@ function sendMessage() {
             text: UI.CHAT.SEND_INPUT.value.trim()
         }));
     } catch (e) {
-        console.log(e);
+        console.error(e);
     }
 }
 
 export function loadPartOfMessages() {
     const messages = JSON.parse(localStorage.getItem('messages'));
+
+    if (messages.length === 0) {
+        UI.CHAT.LOADED_NOTICE.classList.add('show');
+    }
+
     for (let i = 0; i < DEFAULT_MESSAGES_COUNT; i++) {
         const message = createMessage(messages.pop());
         UI.CHAT.BODY.prepend(message);

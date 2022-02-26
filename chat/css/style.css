@@ -81,14 +81,6 @@ h5 {
     opacity: 1;
 }
 
-/*.modal::before {*/
-/*    content: '';*/
-/*    display: inline-block;*/
-/*    vertical-align: middle;*/
-/*    height: 100%;*/
-/*}*/
-
-
 .modal__container {
     padding: 16px 15px;
     width: 273px;
@@ -176,6 +168,14 @@ h5 {
 
 .chat::-moz-scrollbar {
     width: 0;
+}
+
+.chat__loaded {
+    display: none;
+}
+
+.chat__loaded .show {
+    display: block;
 }
 
 .top-panel, .bottom-panel {
