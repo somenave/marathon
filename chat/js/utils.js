@@ -19,5 +19,5 @@ export function checkAuth() {
 }
 
 export function scrollToBottom() {
-    UI.CHAT.BODY.scrollIntoView(false);
+    UI.CHAT.BODY.scrollTop = UI.CHAT.BODY.scrollHeight;
 }
