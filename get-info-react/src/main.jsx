@@ -1,12 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-import Form from './js/components/Form'
-import Output from "./js/components/Output";
+import App from './js/components/App'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Form />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 )
