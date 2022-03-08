@@ -13,10 +13,9 @@ class App extends Component {
             gender: null,
             country: null
         };
-        this.getData = this.getData.bind(this);
     }
 
-    getData(name) {
+    getData = (name) => {
         if (name.length < 3) {
             this.setState({ warn: true });
             return;

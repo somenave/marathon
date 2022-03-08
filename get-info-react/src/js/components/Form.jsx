@@ -6,18 +6,24 @@ import Input from './Input';
 class Form extends Component {
     constructor(props) {
         super(props);
-        this.onSubmitHandler = this.onSubmitHandler.bind(this);
+        this.state = {
+            value: ''
+        };
     }
 
-    onSubmitHandler(e) {
+    onSubmitHandler = (e) => {
         e.preventDefault();
-        this.props.getData(e.target.querySelector('input').value);
+        this.props.getData(this.state.value);
+    }
+    
+    onChangeName = (e) => {
+        this.setState({value: e.target.value});
     }
 
     render() {
         return (
             <form onSubmit={this.onSubmitHandler} className="form" action="" id="form">
-                <Input />
+                <Input onChange={this.onChangeName} value={this.state.value} defaultValue=""/>
                 <Button />
             </form>
         );
