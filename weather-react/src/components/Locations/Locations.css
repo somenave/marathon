@@ -1,0 +1,37 @@
+
+.location {
+    font-size: 24px;
+    line-height: 28px;
+}
+
+.locations__title {
+    padding: 30px 18px 10px;
+    font-size: 24px;
+    line-height: 28px;
+    border-bottom: 1px solid #000000;
+}
+
+.locations {
+    border-left: 1px solid #000000;
+}
+
+.locations-list {
+    padding: 35px 18px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.locations-list__item {
+    font-size: 24px;
+    line-height: 28px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.locations-list__item:not(:last-child) {
+    margin-bottom: 15px;
+}
