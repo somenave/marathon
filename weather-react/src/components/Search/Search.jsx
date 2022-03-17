@@ -1,9 +1,16 @@
 import './Search.css';
+import {useState} from 'react';
+import {currentCity} from "../../App";
 
 export const Search = () => {
+  
+  const onChangeCity = (e) => {
+    localStorage.setItem('currentCity', e.target.value);
+  }
+  
   return (
       <div className="weather__search search">
-        <input type="text" className="search__input" placeholder="Aktobe" />
+        <input type="text" className="search__input" placeholder={currentCity} onChange={(e) => onChangeCity(e)}/>
           <button className="search__icon search-icon" type="submit">
             <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path fillRule="evenodd" clipRule="evenodd"

@@ -1,23 +1,22 @@
 
 import {addToFavorites, favoriteCities} from "../../storage";
 import {currentCity} from "../../App";
+import {getCurrentCity} from "../../utils";
 
-export const Now = ({label, activeTab}) => {
-  
+export const Now = ({label, activeTab, weatherData}) => {
   const isFavourite = favoriteCities.has(currentCity);
-  
   return (
       <div className={`output__now now output-item ${label === activeTab ? "active" : ''}`}>
         <div className="now__temperature">
-          <span className="now__temperature-value">14</span>
+          <span className="now__temperature-value">{weatherData.temperature}</span>
           &deg;
         </div>
         <div className="now__image">
-          <img src="../../src/img/now-weather/cloud.png" alt="" className="now-weather-img" />
+          <img src={weatherData.icon} alt="" className="now-weather-img" />
         </div>
         <div className="now__bottom now-bottom">
-          <div className="now-bottom__location location">{currentCity}</div>
-          <button className={`now-bottom__like ${isFavourite ? "active" : ''}`} type="button" onClick={() => addToFavorites(currentCity)}>
+          <div className="now-bottom__location location">{getCurrentCity()}</div>
+          <button className={`now-bottom__like ${isFavourite ? "active" : ''}`} type="button" onClick={() => addToFavorites(getCurrentCity())}>
             <svg width="24" height="25" viewBox="0 0 24 25" fill="none"
                  xmlns="http://www.w3.org/2000/svg">
               <path opacity="0.54" fillRule="evenodd" clipRule="evenodd"
