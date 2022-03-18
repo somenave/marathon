@@ -197,6 +197,12 @@ h5 {
   border: 1px solid #000000;
 }
 
+.weather__content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+}
+
 .deg {
   display: inline;
   margin-left: -2px;

@@ -35,3 +35,7 @@
 .locations-list__item:not(:last-child) {
     margin-bottom: 15px;
 }
+
+.location-item__name {
+    width: 100%;
+}

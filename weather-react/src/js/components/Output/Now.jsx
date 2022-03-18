@@ -1,10 +1,11 @@
 
-import {addToFavorites, favoriteCities} from "../../storage";
-import {currentCity} from "../../App";
-import {getCurrentCity} from "../../utils";
+import {useContext} from "react";
+import {CityContext} from "../App";
 
-export const Now = ({label, activeTab, weatherData}) => {
-  const isFavourite = favoriteCities.has(currentCity);
+
+export const Now = ({label, activeTab, weatherData, favorites, setFavorites}) => {
+  const currentCity = useContext(CityContext);
+  const isFavourite = favorites.includes(currentCity);
   return (
       <div className={`output__now now output-item ${label === activeTab ? "active" : ''}`}>
         <div className="now__temperature">
@@ -15,8 +16,12 @@ export const Now = ({label, activeTab, weatherData}) => {
           <img src={weatherData.icon} alt="" className="now-weather-img" />
         </div>
         <div className="now__bottom now-bottom">
-          <div className="now-bottom__location location">{getCurrentCity()}</div>
-          <button className={`now-bottom__like ${isFavourite ? "active" : ''}`} type="button" onClick={() => addToFavorites(getCurrentCity())}>
+          <div className="now-bottom__location location">{currentCity}</div>
+          <button className={`now-bottom__like ${isFavourite ? "active" : ''}`} type="button" onClick={() => setFavorites(favorites => {
+            if(!favorites.includes(currentCity)) {
+              setFavorites([...favorites, currentCity]);
+            }
+          })}>
             <svg width="24" height="25" viewBox="0 0 24 25" fill="none"
                  xmlns="http://www.w3.org/2000/svg">
               <path opacity="0.54" fillRule="evenodd" clipRule="evenodd"

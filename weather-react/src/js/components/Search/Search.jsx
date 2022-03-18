@@ -1,11 +1,13 @@
 import './Search.css';
 import {useState} from 'react';
-import {currentCity} from "../../App";
+import {useContext} from "react";
+import {CityContext} from "../App";
 
-export const Search = () => {
+export const Search = ({setCurrentCity}) => {
+  const currentCity = useContext(CityContext);
   
   const onChangeCity = (e) => {
-    localStorage.setItem('currentCity', e.target.value);
+    setCurrentCity(e.target.value);
   }
   
   return (

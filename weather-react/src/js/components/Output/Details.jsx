@@ -1,10 +1,12 @@
-import {currentCity} from "../../App";
-import {getCurrentCity} from "../../utils";
+
+import {useContext} from "react";
+import {CityContext} from "../App";
 
 export const Details = ({label, activeTab, weatherData}) => {
+  const currentCity = useContext(CityContext);
   return (
       <div className={`output__details details output-item  ${label === activeTab ? "active" : ''}`}>
-        <div className="details__location location">{getCurrentCity()}</div>
+        <div className="details__location location">{currentCity}</div>
         <div className="details__item details-item">
           Temperature:
           <span className="details-item__value details-item__temperature"> {weatherData.temperature}</span>
