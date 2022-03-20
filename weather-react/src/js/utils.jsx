@@ -1,13 +1,11 @@
 
-export const serverUrl = 'https://api.openweathermap.org/data/2.5/weather';
-export const apiKey = '87453c8bc09d9673632c72bd4f544cba';
 export const DEFAULT_CITY_NAME = 'Aktobe';
 
-// export function getCurrentCity() {
-//   const _city = localStorage.getItem('currentCity') ?? DEFAULT_CITY_NAME;
-//   return _city;
-// }
-
+export const API = {
+  KEY: '87453c8bc09d9673632c72bd4f544cba',
+  WEATHER: 'https://api.openweathermap.org/data/2.5/weather',
+  FORECAST: 'https://api.openweathermap.org/data/2.5/forecast'
+}
 
 export function createData(response) {
   return {
