@@ -2,25 +2,28 @@
 import { useContext } from 'react';
 import { CityContext } from '../App';
 
-export const Now = ({ label, activeTab, weatherData, favorites, setFavorites }) => {
+export const Now = ({ label, activeTab, setData, weather, setFavorites, favorites }) => {
     const currentCity = useContext(CityContext);
     const isFavourite = favorites.includes(currentCity);
     return (
         <div className={`output__now now output-item ${label === activeTab ? 'active' : ''}`}>
             <div className="now__temperature">
-                <span className="now__temperature-value">{weatherData.temperature}</span>
+                <span className="now__temperature-value">{weather?.temperature}</span>
           &deg;
             </div>
             <div className="now__image">
-                <img src={weatherData.icon} alt="" className="now-weather-img" />
+                <img src={weather?.icon} alt="" className="now-weather-img" />
             </div>
             <div className="now__bottom now-bottom">
                 <div className="now-bottom__location location">{currentCity}</div>
-                <button className={`now-bottom__like ${isFavourite ? 'active' : ''}`} type="button" onClick={() => setFavorites(favorites => {
-                    if (!favorites.includes(currentCity)) {
-                        setFavorites([...favorites, currentCity]);
-                    }
-                })}>
+                <button className={`now-bottom__like ${isFavourite ? 'active' : ''}`} type="button"
+                    onClick={() => {
+                        if (!isFavourite) {
+                            setFavorites([...favorites, currentCity]);
+                        }
+                        setData(currentCity);
+                    }}
+                >
                     <svg width="24" height="25" viewBox="0 0 24 25" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path opacity="0.54" fillRule="evenodd" clipRule="evenodd"

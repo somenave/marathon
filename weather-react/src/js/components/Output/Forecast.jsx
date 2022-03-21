@@ -1,9 +1,8 @@
-
 import { Card } from './Card';
 import { useContext } from 'react';
 import { CityContext } from '../App';
 
-export const Forecast = ({ label, activeTab, forecastData = [] }) => {
+export const Forecast = ({ label, activeTab, forecast = [] }) => {
     const currentCity = useContext(CityContext);
 
     const createForecastItem = (item, i) => {
@@ -17,7 +16,7 @@ export const Forecast = ({ label, activeTab, forecastData = [] }) => {
             <div className="forecast__location location">{currentCity}</div>
             <ul className="forecast__cards">
                 {
-                    forecastData.map(createForecastItem)
+                    forecast.map(createForecastItem)
                 }
             </ul>
         </div>

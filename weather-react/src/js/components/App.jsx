@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../../App.css';
-import { API, createData, DEFAULT_CITY_NAME } from '../utils';
+import { DEFAULT_CITY_NAME, getWeather } from '../utils';
 import { Search } from './Search/Search';
 import { Output } from './Output/Output';
 import { Locations } from './Locations/Locations';
@@ -8,21 +8,14 @@ import { Locations } from './Locations/Locations';
 export const CityContext = React.createContext();
 
 function App() {
-    const [weatherData, setWeatherData] = useState({});
-    const [forecastData, setForecastData] = useState([]);
-    const [favorites, setFavorites] = useState([]);
     const [currentCity, setCurrentCity] = useState(DEFAULT_CITY_NAME);
+    const [favorites, setFavorites] = useState([]);
+    const [weather, setWeather] = useState({});
 
-    useEffect(() => {
-        const storageFavorites = localStorage.getItem('favorites');
-        setFavorites(JSON.parse(storageFavorites));
-    }, []);
-
-    useEffect(() => {
-        if (favorites) {
-            localStorage.setItem('favorites', JSON.stringify(favorites));
-        }
-    }, [favorites]);
+    const setData = async(currentCity) => {
+        const weather = await getWeather(currentCity);
+        setWeather(weather);
+    };
 
     useEffect(() => {
         setCurrentCity(JSON.parse(localStorage.getItem('currentCity')));
@@ -33,47 +26,30 @@ function App() {
     }, [currentCity]);
 
     useEffect(() => {
-        getWeather();
+        setData(currentCity);
     }, []);
-
-    const getWeather = async() => {
-        try {
-            const weatherUrl = `${API.WEATHER}?q=${currentCity}&appid=${API.KEY}&units=metric`;
-            let forecastUrl = '';
-            fetch(weatherUrl)
-                .then(response => response.json())
-                .then(data => {
-                    setWeatherData(createData(data));
-                    const cityId = data.id;
-                    forecastUrl = `${API.FORECAST}?id=${cityId}&appid=${API.KEY}&units=metric`;
-                })
-                .then(() => {
-                    fetch(forecastUrl)
-                        .then(response => response.json())
-                        .then(data => {
-                            const list = data.list;
-                            setForecastData(list);
-                        });
-                })
-                .catch(console.log);
-        } catch (e) {
-            console.log(e);
-        }
-    };
 
     return (
         <div className="App site-container container">
             <CityContext.Provider value={currentCity}>
-                <form action="" className="weather" onSubmit={(e) => {
-                    getWeather();
-                    e.preventDefault();
-                }}>
+                <form action="" className="weather"
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        setData(currentCity);
+                    }}>
                     <Search setCurrentCity={setCurrentCity}/>
                     <div className="weather__content">
-                        <Output weatherData={weatherData} forecastData={forecastData} favorites={favorites}
-                            setFavorites={setFavorites}/>
-                        <Locations favorites={favorites} setFavorites={setFavorites} setCurrentCity={setCurrentCity}
-                            getWeather={getWeather}/>
+                        <Output
+                            favorites={favorites}
+                            setFavorites={setFavorites}
+                            weather={weather}
+                            setData={setData}
+                        />
+                        <Locations
+                            favorites={favorites}
+                            setFavorites={setFavorites}
+                            setCurrentCity={setCurrentCity}
+                            setData={setData}/>
                     </div>
                 </form>
             </CityContext.Provider>
