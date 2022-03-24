@@ -13,15 +13,9 @@ export const Output = ({ weather, setFavorites, favorites, setData}) => {
     return (
         <div className="weather__output output">
             <div className="output-tabs__list">
-                <Now label="Now"
-                     activeTab={activeTab}
-                     weather={weather}
-                     setFavorites={setFavorites}
-                     favorites={favorites}
-                     setData={setData}
-                />
-                <Details label="Details" activeTab={activeTab} weather={weather} />
-                <Forecast label="Forecast" activeTab={activeTab} forecast={weather?.forecast}/>
+                <Now label="Now" activeTab={activeTab} />
+                <Details label="Details" activeTab={activeTab} />
+                <Forecast label="Forecast" activeTab={activeTab} />
             </div>
             <Tabs labels={labels} activeTab={activeTab} setActiveTab={setActiveTab}/>
         </div>

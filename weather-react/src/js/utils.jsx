@@ -1,5 +1,6 @@
+import {storage} from "./storage";
 
-export const DEFAULT_CITY_NAME = JSON.parse(localStorage.getItem('currentCity')) || 'Aktobe';
+export const DEFAULT_CITY_NAME = 'Aktobe';
 
 export const API = {
     KEY: '87453c8bc09d9673632c72bd4f544cba',

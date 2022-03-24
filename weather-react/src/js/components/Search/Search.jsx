@@ -1,18 +1,25 @@
 import './Search.css';
-import { useContext } from 'react';
+import React, {useContext, useState} from 'react';
 
-import { CityContext } from '../App';
+import {changeCurrentCity, weatherHandler} from '../../store/actions';
+import {storage} from "../../storage";
+import {useDispatch, useSelector} from "react-redux";
+import {getWeather} from "../../utils";
 
-export const Search = ({ setCurrentCity }) => {
-    const currentCity = useContext(CityContext);
 
-    const onChangeCity = (e) => {
-        setCurrentCity(e.target.value);
-    };
+export const Search = () => {
+  const [city, setCity] = useState('');
+  const dispatch = useDispatch();
 
     return (
-        <div className="weather__search search">
-            <input type="text" className="search__input" placeholder={currentCity} onChange={(e) => onChangeCity(e)}/>
+        <form action="" className="weather__search search"
+              onSubmit={ async (e) => {
+                e.preventDefault();
+                dispatch(changeCurrentCity(city));
+                const weather = await getWeather(city);
+                dispatch(weatherHandler(weather));
+              }}>
+            <input type="text" className="search__input" placeholder={city} onChange={(e) => setCity(e.target.value)}/>
             <button className="search__icon search-icon" type="submit">
                 <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fillRule="evenodd" clipRule="evenodd"
@@ -20,6 +27,6 @@ export const Search = ({ setCurrentCity }) => {
                         fill="black"/>
                 </svg>
             </button>
-        </div>
+        </form>
     );
 };

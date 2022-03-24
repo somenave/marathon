@@ -181,17 +181,14 @@ h5 {
 
 .container {
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 0;
   max-width: 1200px;
 }
 
 
-.site-container {
+.weather {
   position: relative;
   overflow-x: hidden;
-}
-
-.weather {
   margin: 100px auto;
   max-width: 600px;
   border: 1px solid #000000;

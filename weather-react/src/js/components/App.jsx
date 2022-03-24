@@ -1,60 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
+import {combineReducers, createStore} from 'redux';
+import { useDispatch, useSelector } from 'react-redux';
 import '../../App.css';
-import { DEFAULT_CITY_NAME, getWeather } from '../utils';
-import { Search } from './Search/Search';
-import { Output } from './Output/Output';
-import { Locations } from './Locations/Locations';
-
-export const CityContext = React.createContext();
+import {DEFAULT_CITY_NAME, getWeather} from '../utils';
+import {Search} from './Search/Search';
+import {Output} from './Output/Output';
+import {Locations} from './Locations/Locations';
+import {changeCurrentCity, changeFavorites, weatherHandler} from "../store/actions";
+import {storage} from "../storage";
 
 function App() {
-    const [currentCity, setCurrentCity] = useState(DEFAULT_CITY_NAME);
-    const [favorites, setFavorites] = useState([]);
-    const [weather, setWeather] = useState({});
-
-    const setData = async(currentCity) => {
-        const weather = await getWeather(currentCity);
-        setWeather(weather);
-    };
-
-    useEffect(() => {
-        setCurrentCity(JSON.parse(localStorage.getItem('currentCity')));
-    }, []);
-
-    useEffect(() => {
-        localStorage.setItem('currentCity', JSON.stringify(currentCity));
-    }, [currentCity]);
-
-    useEffect(() => {
-        setData(currentCity);
-    }, []);
-
-    return (
-        <div className="App site-container container">
-            <CityContext.Provider value={currentCity}>
-                <form action="" className="weather"
-                    onSubmit={(e) => {
-                        e.preventDefault();
-                        setData(currentCity);
-                    }}>
-                    <Search setCurrentCity={setCurrentCity}/>
-                    <div className="weather__content">
-                        <Output
-                            favorites={favorites}
-                            setFavorites={setFavorites}
-                            weather={weather}
-                            setData={setData}
-                        />
-                        <Locations
-                            favorites={favorites}
-                            setFavorites={setFavorites}
-                            setCurrentCity={setCurrentCity}
-                            setData={setData}/>
-                    </div>
-                </form>
-            </CityContext.Provider>
+  
+  const state = useSelector(state => state);
+  const currentCity = state.currentCity || DEFAULT_CITY_NAME;
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    storage.saveCurrentCity(currentCity);
+  }, [currentCity])
+  
+  return (
+        <div className="App weather container">
+            <Search />
+            <div className="weather__content">
+              <Output/>
+              <Locations />
+            </div>
         </div>
-    );
+  );
 }
 
 export default App;

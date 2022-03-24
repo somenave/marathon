@@ -1,9 +1,10 @@
 import { Card } from './Card';
 import { useContext } from 'react';
-import { CityContext } from '../App';
+import {storage} from "../../storage";
+
 
 export const Forecast = ({ label, activeTab, forecast = [] }) => {
-    const currentCity = useContext(CityContext);
+    const currentCity = storage.getCurrentCity();
 
     const createForecastItem = (item, i) => {
         return (

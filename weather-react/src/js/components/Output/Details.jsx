@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { CityContext } from '../App';
+import {storage} from "../../storage";
 
 export const Details = ({ label, activeTab, weather }) => {
-    const currentCity = useContext(CityContext);
+    const currentCity = storage.getCurrentCity();
     return (
         <div className={`output__details details output-item  ${label === activeTab ? 'active' : ''}`}>
             <div className="details__location location">{currentCity}</div>
