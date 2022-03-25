@@ -1,11 +1,12 @@
 import {combineReducers} from "redux";
 import {ADD_FAVORITE_CITY, CURRENT_CITY, DELETE_FAVORITE_CITY, WEATHER} from "./actions";
 import {DEFAULT_CITY_NAME} from "../utils";
+import {storage} from "../storage";
 
 
 const initialState = {
-  currentCity: DEFAULT_CITY_NAME,
-  favorites: [],
+  currentCity: storage.getCurrentCity() || DEFAULT_CITY_NAME,
+  favorites: storage.getFavorites() || [],
   weather: {}
 }
 
@@ -34,7 +35,7 @@ const favorites = (state = initialState.favorites, action) => {
 const weather = (state = initialState.weather, action) => {
   switch (action.type) {
     case WEATHER:
-      return {...state, ...{weather: action.weather}}
+      return action.weather;
     default:
       return state
   }

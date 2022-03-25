@@ -2,16 +2,14 @@ import './Locations.css';
 import {useEffect, useContext} from 'react';
 import {storage} from "../../storage";
 import {useDispatch, useSelector} from "react-redux";
-import {changeCurrentCity, changeFavorites, deleteFavorite} from "../../store/actions";
-import {DEFAULT_CITY_NAME} from "../../utils";
+import {changeCurrentCity, changeFavorites, deleteFavorite, weatherHandler} from "../../store/actions";
+import {DEFAULT_CITY_NAME, getWeather} from "../../utils";
 
 const LocationItem = ({city}) => {
-  const state = useSelector(state => state);
   const dispatch = useDispatch();
   
   const deleteFromFavorites = (city) => {
     dispatch(deleteFavorite(city));
-    storage.saveFavorites(state.favorites);
   };
   
   return (
@@ -25,8 +23,7 @@ const LocationItem = ({city}) => {
 };
 
 export const Locations = ({}) => {
-  const state = useSelector(state => state);
-  const favorites = state.favorites;
+  const {favorites} = useSelector(state => state);
   const dispatch = useDispatch();
   
   useEffect(() => {
@@ -34,7 +31,7 @@ export const Locations = ({}) => {
   }, []);
   
   useEffect(() => {
-    if (favorites) {
+    if (favorites.length > 0) {
       storage.saveFavorites(favorites);
     }
   }, [favorites]);
@@ -51,9 +48,12 @@ export const Locations = ({}) => {
           if (e.target.tagName === 'SPAN') {
             const city = e.target.textContent;
             dispatch(changeCurrentCity(city));
+            getWeather(city).then((weather) => {
+              dispatch(weatherHandler(weather));
+            });
           }
         }}>
-          {[...favorites]?.map(createLocationItem)}
+          {favorites?.map(createLocationItem)}
         </ul>
       </div>
   );

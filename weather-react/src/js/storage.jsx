@@ -6,18 +6,17 @@ export const storage = {
       return
     }
     const favorites = JSON.stringify([...favoriteCities])
-    localStorage.setItem("favoriteCities", favorites)
+    localStorage.setItem("favorites", favorites)
   },
   getFavorites: function () {
-    const favoriteCities = localStorage.getItem("favoriteCities")
+    const favoriteCities = localStorage.getItem("favorites")
     if (!favoriteCities) {
-      return new Set([])
+      return []
     }
-    return new Set(JSON.parse(favoriteCities))
+    return [...new Set(JSON.parse(favoriteCities))]
   },
   getCurrentCity: function () {
-    const city = JSON.parse(localStorage.getItem('currentCity')) || DEFAULT_CITY_NAME;
-    return city;
+    return JSON.parse(localStorage.getItem('currentCity')) || DEFAULT_CITY_NAME;
   },
   saveCurrentCity: function (city) {
     localStorage.setItem('currentCity', JSON.stringify(city));

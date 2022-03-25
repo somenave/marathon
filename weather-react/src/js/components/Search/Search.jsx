@@ -15,8 +15,10 @@ export const Search = ({}) => {
         <form action="" className="weather__search search"
               onSubmit={ async (e) => {
                 e.preventDefault();
-                dispatch(changeCurrentCity(city));
-                dispatch(weatherHandler(getWeather(city)));
+                getWeather(city).then((weather) => {
+                  dispatch(changeCurrentCity(city));
+                  dispatch(weatherHandler(weather));
+                });
                 e.target.reset();
               }}>
             <input type="text" className="search__input" placeholder={city || DEFAULT_CITY_NAME} onChange={(e) => setCity(e.target.value)}/>

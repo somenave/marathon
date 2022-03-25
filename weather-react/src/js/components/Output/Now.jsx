@@ -4,13 +4,10 @@ import {storage} from "../../storage";
 import {useDispatch, useSelector} from "react-redux";
 import {addFavorite, changeFavorites} from "../../store/actions";
 
-export const Now = ({ label, activeTab, weather}) => {
-    const state = useSelector(state => state);
+export const Now = ({ label, activeTab}) => {
+    const {city, favorites, weather} = useSelector(state => state);
     const dispatch = useDispatch();
-    // const weather = state.weather;
-    const currentCity = state.currentCity;
-    const favorites = state.favorites;
-  
+    
     return (
         <div className={`output__now now output-item ${label === activeTab ? 'active' : ''}`}>
             <div className="now__temperature">
@@ -21,11 +18,11 @@ export const Now = ({ label, activeTab, weather}) => {
                 <img src={weather?.icon} alt="" className="now-weather-img" />
             </div>
             <div className="now__bottom now-bottom">
-                <div className="now-bottom__location location">{currentCity}</div>
-                <button className={`now-bottom__like ${favorites.includes(currentCity) ? 'active' : ''}`} type="button"
+                <div className="now-bottom__location location">{city}</div>
+                <button className={`now-bottom__like ${favorites.includes(city) ? 'active' : ''}`} type="button"
                     onClick={() => {
-                      dispatch(addFavorite(currentCity));
-                      storage.saveFavorites([...favorites, currentCity])
+                      dispatch(addFavorite(city));
+                      storage.saveFavorites([...favorites, city])
                     }}
                 >
                     <svg width="24" height="25" viewBox="0 0 24 25" fill="none"
