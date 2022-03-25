@@ -4,10 +4,10 @@ import {storage} from "../../storage";
 import {useDispatch, useSelector} from "react-redux";
 import {addFavorite, changeFavorites} from "../../store/actions";
 
-export const Now = ({ label, activeTab}) => {
+export const Now = ({ label, activeTab, weather}) => {
     const state = useSelector(state => state);
     const dispatch = useDispatch();
-    const weather = state.weather;
+    // const weather = state.weather;
     const currentCity = state.currentCity;
     const favorites = state.favorites;
   

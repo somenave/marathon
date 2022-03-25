@@ -10,20 +10,22 @@ import {changeCurrentCity, changeFavorites, weatherHandler} from "../store/actio
 import {storage} from "../storage";
 
 function App() {
-  
+  const [weather, setWeather] = useState({});
   const state = useSelector(state => state);
-  const currentCity = state.currentCity || DEFAULT_CITY_NAME;
+  const currentCity = state.currentCity ?? DEFAULT_CITY_NAME;
   const dispatch = useDispatch();
   
   useEffect(() => {
     storage.saveCurrentCity(currentCity);
+    setWeather(getWeather(currentCity));
+    dispatch(weatherHandler(weather));
   }, [currentCity])
   
   return (
         <div className="App weather container">
-            <Search />
+            <Search setWeahter={setWeather}/>
             <div className="weather__content">
-              <Output/>
+              <Output weather={weather}/>
               <Locations />
             </div>
         </div>

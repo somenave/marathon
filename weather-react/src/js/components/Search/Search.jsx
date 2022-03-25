@@ -4,10 +4,10 @@ import React, {useContext, useState} from 'react';
 import {changeCurrentCity, weatherHandler} from '../../store/actions';
 import {storage} from "../../storage";
 import {useDispatch, useSelector} from "react-redux";
-import {getWeather} from "../../utils";
+import {DEFAULT_CITY_NAME, getWeather} from "../../utils";
 
 
-export const Search = () => {
+export const Search = ({}) => {
   const [city, setCity] = useState('');
   const dispatch = useDispatch();
 
@@ -16,10 +16,10 @@ export const Search = () => {
               onSubmit={ async (e) => {
                 e.preventDefault();
                 dispatch(changeCurrentCity(city));
-                const weather = await getWeather(city);
-                dispatch(weatherHandler(weather));
+                dispatch(weatherHandler(getWeather(city)));
+                e.target.reset();
               }}>
-            <input type="text" className="search__input" placeholder={city} onChange={(e) => setCity(e.target.value)}/>
+            <input type="text" className="search__input" placeholder={city || DEFAULT_CITY_NAME} onChange={(e) => setCity(e.target.value)}/>
             <button className="search__icon search-icon" type="submit">
                 <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fillRule="evenodd" clipRule="evenodd"
