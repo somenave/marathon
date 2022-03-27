@@ -1,26 +1,22 @@
 import './Search.css';
-import React, {useContext, useState} from 'react';
+import React, {  useState } from 'react';
 
-import {changeCurrentCity, weatherHandler} from '../../store/actions';
-import {storage} from "../../storage";
-import {useDispatch, useSelector} from "react-redux";
-import {DEFAULT_CITY_NAME, getWeather} from "../../utils";
-
+import { changeCurrentCity, getWeatherAction } from '../../store/actions';
+import { useDispatch } from 'react-redux';
+import { DEFAULT_CITY_NAME } from '../../utils';
 
 export const Search = ({}) => {
-  const [city, setCity] = useState('');
-  const dispatch = useDispatch();
+    const [city, setCity] = useState('');
+    const dispatch = useDispatch();
 
     return (
         <form action="" className="weather__search search"
-              onSubmit={ async (e) => {
+            onSubmit={ async(e) => {
                 e.preventDefault();
-                getWeather(city).then((weather) => {
-                  dispatch(changeCurrentCity(city));
-                  dispatch(weatherHandler(weather));
-                });
+                dispatch(changeCurrentCity(city));
+                dispatch(getWeatherAction(city));
                 e.target.reset();
-              }}>
+            }}>
             <input type="text" className="search__input" placeholder={city || DEFAULT_CITY_NAME} onChange={(e) => setCity(e.target.value)}/>
             <button className="search__icon search-icon" type="submit">
                 <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">

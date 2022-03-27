@@ -4,7 +4,6 @@ import { Tabs } from './Tabs';
 import { Now } from './Now';
 import { Details } from './Details';
 import { Forecast } from './Forecast';
-import {Locations} from "../Locations/Locations";
 
 export const Output = () => {
     const labels = ['Now', 'Details', 'Forecast'];

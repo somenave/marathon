@@ -1,9 +1,7 @@
-import { useContext } from 'react';
-import {storage} from "../../storage";
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector } from 'react-redux';
 
 export const Details = ({ label, activeTab }) => {
-  const {weather} = useSelector(state => state);
+    const { weather } = useSelector(state => state);
     return (
         <div className={`output__details details output-item  ${label === activeTab ? 'active' : ''}`}>
             <div className="details__location location">{weather?.city}</div>

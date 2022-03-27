@@ -1,5 +1,3 @@
-import {storage} from "./storage";
-
 export const DEFAULT_CITY_NAME = 'Aktobe';
 
 export const API = {
